@@ -27,7 +27,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 /* film grain */
@@ -138,7 +138,7 @@ main {
   letter-spacing: -0.04em;
   text-transform: uppercase;
   font-size: 26px;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 1;
 }
 
@@ -333,7 +333,7 @@ main {
   letter-spacing: -0.05em;
   text-transform: uppercase;
   font-size: 30px;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 0.92;
 }
 
@@ -431,7 +431,7 @@ main {
 .eventArt b {
   letter-spacing: -0.06em;
   font-size: 54px;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 0.8;
 }
 
@@ -482,7 +482,7 @@ h1 .accent {
   max-width: none;
   margin: 30px 0;
   font-size: clamp(21px, 2.5vw, 32px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.12;
 }
 
@@ -708,7 +708,7 @@ h1 .accent {
   height: 100%;
   padding: 40px 18px 18px;
   font-size: clamp(30px, 3.4vw, 46px);
-  font-weight: 950;
+  font-weight: 900;
   line-height: 0.85;
   display: flex;
 }
@@ -729,6 +729,7 @@ h1 .accent {
 }
 
 .card h2 {
+  font-weight: 900;
   letter-spacing: -0.045em;
   text-transform: uppercase;
   overflow-wrap: anywhere;
@@ -1436,7 +1437,7 @@ a.creator:hover {
   text-transform: uppercase;
   margin: 0;
   font-size: 30px;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 0.95;
 }
 
@@ -1451,7 +1452,7 @@ a.creator:hover {
   text-shadow: 3px 3px 0 var(--ink);
   letter-spacing: -0.06em;
   font-size: 64px;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 0.8;
 }
 
@@ -1543,7 +1544,7 @@ a.creator:hover {
   text-shadow: 3px 3px 0 var(--ink);
   letter-spacing: -0.04em;
   font-size: 64px;
-  font-weight: 950;
+  font-weight: 900;
   line-height: 0.85;
 }
 
@@ -1609,7 +1610,7 @@ a.creator:hover {
 .faqList dt {
   margin-bottom: 4px;
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .faqList dd {
@@ -1678,6 +1679,7 @@ footer > div:first-child {
 }
 
 footer > div:first-child b {
+  font-weight: 900;
   color: var(--orange);
   font-size: 72px;
   line-height: 0.8;

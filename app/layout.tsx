@@ -15,7 +15,15 @@ const display = localFont({
   display: "swap",
 });
 
-// Body/terminal font. The system `monospace` centers narrow glyphs like "i" in their cell,
+// Text font: same family as the headline, so the heavy titles read as one system with it
+const sans = localFont({
+  src: "../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
+  weight: "100 900",
+  variable: "--font-sans",
+  display: "swap",
+});
+
+// Terminal font. The system `monospace` centers narrow glyphs like "i" in their cell,
 // so wrapped lines starting with one sit visibly off the left edge; Geist Mono's slab "i" doesn't.
 const mono = localFont({
   src: "../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2",
@@ -50,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );
