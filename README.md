@@ -29,7 +29,8 @@ Written in TypeScript on Next.js 16, deployed on Vercel from `main`.
 | **Hero** | Disruption Lab @ UIUC × Replit branding, a live countdown ("LIVE NOW" during the event, "SHIPPED" after), and a button to whichever sign-up form is current |
 | **Date sticker** (top right) | Click to open the event details: date, time, location, add to calendar, directions |
 | **Event Guide** | The three forms in order (interest → pre-event → post-event), itinerary, awards, food, FAQ |
-| **Project wall** | Six "your build here" placeholders before the event; every submitted app after it. Winners get a 🏆 ribbon and move to the top |
+| **Project wall** | Six "your build here" placeholders before the event; every submitted app after it. Winners get a 🏆 ribbon and move to the top. Once live: search, **Surprise me**, and a **Tour** view that auto-advances one build at a time (for the projector at demos) |
+| **Project pages** (`/p/<slug>`) | One page per build with its own link-preview image, so builders can share their project. Every card has a **Copy link** button |
 | **Footer** | Disruption Lab Instagram, LinkedIn, website, and this repository |
 
 Extras: add to calendar (Google Calendar, plus an `.ics` file for Apple and Outlook), a generated link-preview card for texts and social posts, a favicon and iPhone icon, a themed 404 page, and load-in and scroll animations that turn off for anyone with reduced motion enabled.
