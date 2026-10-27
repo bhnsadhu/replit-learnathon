@@ -1,7 +1,6 @@
 import { BrandLockup } from "@/components/BrandLockup";
 import { EventPromo } from "@/components/EventPromo";
 import { EventGuide } from "@/components/EventGuide";
-import { SlotCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Terminal } from "@/components/Terminal";
@@ -83,20 +82,14 @@ export default function Home() {
               : "WALL OPENS // NOV 7 2026"}
           </span>
         </div>
-        {live ? (
-          <WallBrowser projects={projects} />
-        ) : (
-          <div className="grid">
-            {Array.from({ length: EMPTY_SLOTS }, (_, i) => (
-              <SlotCard
-                key={i}
-                index={i}
-                href={event.forms.post ?? signupForm}
-                label={event.forms.post ? "SUBMIT YOUR BUILD ↗" : "SAVE YOUR SPOT ↗"}
-              />
-            ))}
-          </div>
-        )}
+        <WallBrowser
+          projects={projects}
+          slots={{
+            count: EMPTY_SLOTS,
+            href: event.forms.post ?? signupForm,
+            label: event.forms.post ? "SUBMIT YOUR BUILD ↗" : "SAVE YOUR SPOT ↗",
+          }}
+        />
       </section>
 
       <footer>

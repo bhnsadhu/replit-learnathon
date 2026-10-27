@@ -1090,6 +1090,25 @@ a.creator:hover {
   transform: scale(1.02);
 }
 
+/* reserved slot in the tour, before the event */
+.tourSlot {
+  border-style: dashed;
+  border-color: #eef1f566;
+  box-shadow: 8px 8px 0 #1d58a766;
+}
+
+.tourSlot .slotScreen {
+  font-size: 15px;
+}
+
+.tourInfo .tourSlotTitle {
+  color: #eef1f566;
+}
+
+.wallSearch input:disabled {
+  cursor: not-allowed;
+}
+
 .tourInfo {
   flex-direction: column;
   align-items: flex-start;

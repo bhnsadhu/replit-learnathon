@@ -81,13 +81,17 @@ export function ProjectCard({
 }
 
 export function SlotCard({
+  id,
   index,
   href,
   label,
+  picked,
 }: {
+  id?: string;
   index: number;
   href?: string | null;
   label: string;
+  picked?: boolean;
 }) {
   const body = (
     <>
@@ -116,7 +120,8 @@ export function SlotCard({
 
   return (
     <article
-      className="card slot"
+      id={id}
+      className={picked ? "card slot picked" : "card slot"}
       style={{ "--tilt": tiltFor(index) } as React.CSSProperties}
       aria-label="Empty project slot"
     >

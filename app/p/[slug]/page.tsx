@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CopyLink } from "@/components/CopyLink";
-import { buildLabel } from "@/components/ProjectCard";
+import { ProjectStage } from "@/components/Stage";
 import { event } from "@/data/event";
 import { projectBySlug, projects } from "@/lib/projects";
 
@@ -55,51 +54,7 @@ export default async function ProjectPage({ params }: Props) {
       </header>
 
       <section className="tourStage">
-        <a
-          className="screen tourScreen"
-          href={p.url}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Open ${p.title}`}
-        >
-          {p.screenshot ? (
-            <img src={p.screenshot} alt={`Screenshot of ${p.title}`} />
-          ) : (
-            <div className="screenFallback" aria-hidden="true">
-              {p.title}
-            </div>
-          )}
-        </a>
-        <div className="tourInfo">
-          <p className="tourMeta">
-            {buildLabel(i)}
-            <span>
-              {" "}
-              · {i + 1} OF {projects.length}
-            </span>
-          </p>
-          {p.award && <span className="tourAward">🏆 {p.award.toUpperCase()}</span>}
-          <h1>{p.title}</h1>
-          <p className="tourDesc">{p.description}</p>
-          <p className="tourBy">
-            BY{" "}
-            {p.creator.linkedin ? (
-              <a href={p.creator.linkedin} target="_blank" rel="noreferrer">
-                {p.creator.name} <b>in ↗</b>
-              </a>
-            ) : (
-              p.creator.name
-            )}
-          </p>
-          <div className="tourActions">
-            <a className="cta" href={p.url} target="_blank" rel="noreferrer">
-              <span>RUN</span>
-              LAUNCH PROJECT
-              <b>↗</b>
-            </a>
-            <CopyLink slug={p.slug} className="ctaGhost" />
-          </div>
-        </div>
+        <ProjectStage project={p} number={i} position={i} total={projects.length} Heading="h1" />
       </section>
 
       {projects.length > 1 && (

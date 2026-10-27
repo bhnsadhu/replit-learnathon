@@ -11,8 +11,12 @@ let active: Lenis | null = null;
 
 /** Scroll something into view the same way in-page links do (plain scroll when Lenis is off). */
 export function scrollToEl(el: HTMLElement) {
-  if (active) active.scrollTo(el, jump);
-  else el.scrollIntoView({ block: "start" });
+  if (!active) return el.scrollIntoView({ block: "start" });
+  // measure from the real scroll position: if the page just shrank, the browser clamped it
+  // and Lenis's own idea of where we are (and its limit) is stale until it resizes
+  active.resize();
+  const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+  active.scrollTo(el.getBoundingClientRect().top + window.scrollY - margin, jump);
 }
 
 /** Eased wheel scrolling for the whole page. Touch stays native; reduced-motion users get plain scroll. */
