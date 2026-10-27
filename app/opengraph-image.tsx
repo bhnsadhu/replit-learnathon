@@ -1,21 +1,14 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { ImageResponse } from "next/og";
 import { event } from "@/data/event";
+import { ogFonts } from "@/lib/og";
 import { projects } from "@/lib/projects";
 
 export const alt = `Built with Replit | Disruption Lab × Replit Learnathon at ${event.school}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const FONTS = path.join(process.cwd(), "node_modules/geist/dist/fonts");
-
 export default async function OgImage() {
   const count = projects.length;
-  const [black, mono] = await Promise.all([
-    readFile(path.join(FONTS, "geist-sans/Geist-Black.ttf")),
-    readFile(path.join(FONTS, "geist-mono/GeistMono-Bold.ttf")),
-  ]);
 
   return new ImageResponse(
     (
@@ -108,12 +101,6 @@ export default async function OgImage() {
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: [
-        { name: "Geist", data: black, weight: 900, style: "normal" },
-        { name: "Geist Mono", data: mono, weight: 700, style: "normal" },
-      ],
-    },
+    { ...size, fonts: await ogFonts() },
   );
 }

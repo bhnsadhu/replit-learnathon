@@ -1,10 +1,11 @@
 import { BrandLockup } from "@/components/BrandLockup";
 import { EventPromo } from "@/components/EventPromo";
 import { EventGuide } from "@/components/EventGuide";
-import { ProjectCard, SlotCard } from "@/components/ProjectCard";
+import { SlotCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Terminal } from "@/components/Terminal";
+import { WallBrowser } from "@/components/WallBrowser";
 import { event, signupForm } from "@/data/event";
 import { projects } from "@/lib/projects";
 
@@ -82,18 +83,20 @@ export default function Home() {
               : "WALL OPENS // NOV 7 2026"}
           </span>
         </div>
-        <div className="grid">
-          {live
-            ? projects.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} />)
-            : Array.from({ length: EMPTY_SLOTS }, (_, i) => (
-                <SlotCard
-                  key={i}
-                  index={i}
-                  href={event.forms.post ?? signupForm}
-                  label={event.forms.post ? "SUBMIT YOUR BUILD ↗" : "SAVE YOUR SPOT ↗"}
-                />
-              ))}
-        </div>
+        {live ? (
+          <WallBrowser projects={projects} />
+        ) : (
+          <div className="grid">
+            {Array.from({ length: EMPTY_SLOTS }, (_, i) => (
+              <SlotCard
+                key={i}
+                index={i}
+                href={event.forms.post ?? signupForm}
+                label={event.forms.post ? "SUBMIT YOUR BUILD ↗" : "SAVE YOUR SPOT ↗"}
+              />
+            ))}
+          </div>
+        )}
       </section>
 
       <footer>

@@ -1,5 +1,6 @@
 import type { Project } from "@/lib/types";
 import { initials } from "@/lib/projects";
+import { CopyLink } from "./CopyLink";
 
 const TILTS = ["-0.65deg", "0deg", "0.65deg", "0deg"];
 
@@ -7,13 +8,26 @@ export const tiltFor = (index: number) => TILTS[index % TILTS.length];
 
 export const buildLabel = (index: number) => `BUILD_${String(index + 1).padStart(2, "0")}`;
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({
+  project,
+  index,
+  hidden,
+  picked,
+}: {
+  project: Project;
+  index: number;
+  hidden?: boolean;
+  /** Just landed on by "Surprise me" */
+  picked?: boolean;
+}) {
   const { creator } = project;
   const hasAvatar = Boolean(creator.avatar);
 
   return (
     <article
-      className={project.award ? "card winner" : "card"}
+      id={project.slug}
+      hidden={hidden}
+      className={["card", project.award && "winner", picked && "picked"].filter(Boolean).join(" ")}
       style={{ "--tilt": tiltFor(index) } as React.CSSProperties}
     >
       {project.award && <span className="award">🏆 {project.award.toUpperCase()}</span>}
@@ -40,6 +54,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           <span className="launch">LAUNCH PROJECT ↗</span>
         </div>
       </a>
+      <CopyLink slug={project.slug} />
       {creator.linkedin ? (
         <a
           className={hasAvatar ? "creator creatorWithAvatar" : "creator"}

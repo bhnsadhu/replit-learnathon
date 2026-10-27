@@ -21,3 +21,5 @@ export const initials = (name: string) =>
     .slice(0, 2)
     .map((w) => w[0]!.toUpperCase())
     .join("");
+
+export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);

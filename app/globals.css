@@ -896,6 +896,450 @@ a.creator:hover {
   background: #13294b2e;
 }
 
+/* share button, sits in the card's "•••" title bar */
+.copyLink {
+  z-index: 3;
+  height: 27px;
+  color: var(--paper);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  padding: 0 10px;
+  font: 800 10px var(--font-mono), monospace;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.copyLink:hover,
+.copyLink:focus-visible {
+  color: var(--orange);
+}
+
+/* ---------- live wall: toolbar, surprise pick, tour ---------- */
+
+.wallBar {
+  z-index: 8;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  align-items: stretch;
+  gap: 10px;
+  margin: -16px 0 44px;
+  padding: 10px;
+  font: 900 12px var(--font-mono), monospace;
+  display: flex;
+  position: sticky;
+  top: 12px;
+}
+
+.wallSearch {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 0 12px;
+  display: flex;
+}
+
+.wallSearch:focus-within {
+  box-shadow: 3px 3px 0 var(--orange);
+}
+
+.wallSearch span {
+  color: var(--blue);
+  flex: none;
+}
+
+.wallSearch input {
+  color: var(--ink);
+  background: none;
+  border: 0;
+  outline: 0;
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  font: 500 13px var(--font-mono), monospace;
+}
+
+.wallSearch input::placeholder {
+  color: var(--faint);
+}
+
+.viewToggle {
+  border: 2px solid var(--ink);
+  display: flex;
+}
+
+.viewToggle button {
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 0 14px;
+}
+
+.viewToggle button + button {
+  border-left: 2px solid var(--ink);
+}
+
+.viewToggle button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.surprise,
+.noMatch button {
+  background: var(--orange);
+  color: var(--ink);
+  letter-spacing: 0.06em;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0 14px;
+  transition: all 0.12s;
+}
+
+.surprise:hover,
+.noMatch button:hover {
+  box-shadow: 5px 5px 0 var(--blue);
+  transform: translate(-2px, -2px);
+}
+
+.surprise:active {
+  box-shadow: 1px 1px 0 var(--ink);
+  transform: translate(2px, 2px);
+}
+
+.surprise:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.wallCount {
+  color: var(--muted);
+  white-space: nowrap;
+  align-self: center;
+  padding: 0 4px;
+}
+
+/* lands below the sticky toolbar */
+.card {
+  scroll-margin-top: 110px;
+}
+
+.card.picked {
+  outline: 5px solid var(--orange);
+  outline-offset: 8px;
+  box-shadow: 14px 16px 0 var(--blue);
+  transform: rotate(0) translateY(-8px);
+}
+
+.card.picked:after {
+  content: "⤨ SURPRISE PICK";
+  z-index: 4;
+  background: var(--ink);
+  color: var(--orange);
+  letter-spacing: 0.08em;
+  padding: 6px 9px;
+  font: 900 11px var(--font-mono), monospace;
+  position: absolute;
+  top: -19px;
+  right: -12px;
+  transform: rotate(3deg);
+}
+
+.noMatch {
+  text-align: center;
+  border: 3px dashed #13294b55;
+  padding: 48px 20px;
+  font: 13px var(--font-mono), monospace;
+}
+
+.noMatch p {
+  margin: 0 0 18px;
+}
+
+.noMatch button {
+  padding: 10px 16px;
+  font: 900 12px var(--font-mono), monospace;
+}
+
+.tour {
+  background: var(--navy);
+  color: var(--paper);
+  border: 3px solid var(--ink);
+  box-shadow: 9px 9px 0 var(--orange);
+  padding: 28px;
+}
+
+.tourStage {
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 32px;
+  display: grid;
+  animation: 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both tourIn;
+}
+
+.tourScreen {
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--blue);
+  display: block;
+}
+
+.tourScreen:hover img {
+  transform: scale(1.02);
+}
+
+.tourInfo {
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  display: flex;
+}
+
+.tourMeta {
+  color: var(--orange);
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+  font: 900 12px var(--font-mono), monospace;
+}
+
+.tourMeta span {
+  color: #eef1f599;
+}
+
+.tourAward {
+  background: var(--orange);
+  color: var(--ink);
+  letter-spacing: 0.06em;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin-bottom: 16px;
+  padding: 6px 9px;
+  font: 900 11px var(--font-mono), monospace;
+  transform: rotate(-3deg);
+}
+
+.tourInfo :is(h1, h2) {
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+  margin: 0 0 16px;
+  font-size: clamp(36px, 4.4vw, 64px);
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+.tourDesc {
+  color: #eef1f5cc;
+  margin: 0 0 18px;
+  font: 15px/1.5 var(--font-mono), monospace;
+}
+
+.tourBy {
+  letter-spacing: 0.06em;
+  margin: 0;
+  font: 800 12px var(--font-mono), monospace;
+}
+
+.tourBy a {
+  color: var(--paper);
+  border-bottom: 2px solid var(--orange);
+  text-decoration: none;
+}
+
+.tourBy b {
+  color: var(--orange);
+}
+
+.tourActions {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 24px;
+  margin-top: auto;
+  padding-top: 26px;
+  display: flex;
+}
+
+.tourActions .ctaGhost {
+  cursor: pointer;
+}
+
+.tourControls {
+  letter-spacing: 0.08em;
+  border-top: 2px solid #eef1f533;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding-top: 20px;
+  font: 900 11px var(--font-mono), monospace;
+  display: flex;
+}
+
+.tourControls button {
+  border: 2px solid var(--paper);
+  cursor: pointer;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+  transition: all 0.12s;
+  display: grid;
+}
+
+.tourControls button:hover {
+  background: var(--orange);
+  color: var(--ink);
+  border-color: var(--orange);
+}
+
+.tourControls .tourPlay {
+  font-size: 12px;
+}
+
+.tourProgress {
+  background: #eef1f533;
+  flex: 1;
+  height: 4px;
+  margin: 0 8px;
+  overflow: hidden;
+}
+
+.tourProgress i {
+  background: var(--orange);
+  transform-origin: 0;
+  height: 100%;
+  animation: 1s linear both tourTimer;
+  display: block;
+}
+
+.tourStatus {
+  color: #eef1f599;
+  white-space: nowrap;
+}
+
+.tourDots {
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+  display: flex;
+}
+
+/* thin dashes, but with a tappable height */
+.tourDots button {
+  cursor: pointer;
+  background: #eef1f540 content-box;
+  width: 18px;
+  height: 14px;
+  padding: 5px 0;
+  transition: all 0.18s;
+}
+
+.tourDots button:hover {
+  background-color: var(--paper);
+}
+
+.tourDots button[aria-current] {
+  background-color: var(--orange);
+  width: 32px;
+}
+
+@keyframes tourIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes tourTimer {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .tourStage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  /* a wrapped toolbar is too tall to pin on a phone */
+  .wallBar {
+    flex-wrap: wrap;
+    position: static;
+  }
+
+  .wallSearch {
+    flex-basis: 100%;
+  }
+
+  .viewToggle button,
+  .surprise {
+    padding: 10px 12px;
+  }
+
+  .tour {
+    padding: 18px;
+  }
+
+  .tourStatus {
+    display: none;
+  }
+}
+
+/* ---------- project page (/p/slug) ---------- */
+
+.placard {
+  background: var(--navy);
+  color: var(--paper);
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px var(--gutter) 64px;
+  display: flex;
+}
+
+.placardTop {
+  letter-spacing: 0.08em;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font: 900 12px var(--font-mono), monospace;
+  display: flex;
+}
+
+.placardTop span {
+  color: #eef1f599;
+}
+
+.placardNav {
+  letter-spacing: 0.06em;
+  border-top: 2px solid #eef1f533;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 20px;
+  font: 900 12px var(--font-mono), monospace;
+  display: flex;
+}
+
+.placardNav a {
+  color: var(--paper);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.placardNav a:hover {
+  color: var(--orange);
+}
+
 /* ---------- event guide (Illini orange) ---------- */
 
 .guide {
