@@ -33,11 +33,11 @@ Written in TypeScript on Next.js 16, deployed on Vercel from `main`.
 | **Project pages** (`/p/<slug>`) | One page per build with its own link-preview image, so builders can share their project. Every card has a **Copy link** button |
 | **Footer** | Disruption Lab Instagram, LinkedIn, website, and this repository |
 
-Extras: add to calendar (Google Calendar, plus an `.ics` file for Apple and Outlook), a generated link-preview card for texts and social posts, a favicon and iPhone icon, a themed 404 page, and load-in and scroll animations that turn off for anyone with reduced motion enabled.
+Extras: add to calendar (Google Calendar, plus an `.ics` file for Apple and Outlook), a generated link-preview card for texts and social posts, a favicon and iPhone icon, a themed 404 page, and load-in, scroll and tour animations (winner ribbons stamp on, tour slides move in the direction you browse) that turn off for anyone with reduced motion enabled.
 
 | Event Guide | Project wall |
 | --- | --- |
-| ![The Event Guide: three numbered form steps, then itinerary, prizes and food cards](docs/images/guide.png) | ![The project wall before the event: reserved "your build here" slots with a save-your-spot link](docs/images/wall.png) |
+| ![The Event Guide: three numbered form steps, then itinerary, prizes and food cards](docs/images/guide.png) | ![The project wall before the event: the search, tour and surprise-me toolbar above reserved "your build here" slots with a save-your-spot link](docs/images/wall.png) |
 
 *Captured from the live site while the pre-event form, itinerary, food and prizes were still to be announced.*
 
@@ -195,14 +195,14 @@ Apps cache previews, so after changing them, test with a fresh link such as `htt
 | Layer | Choice |
 | --- | --- |
 | Framework | Next.js 16 (App Router), React 19, TypeScript |
-| Styling | Plain CSS in [`app/globals.css`](app/globals.css) on the Illinois palette (Illini blue and orange), Tailwind 4 for its base reset only, Geist for type |
+| Styling | Plain CSS in [`app/globals.css`](app/globals.css) on the Illinois palette (Illini blue and orange), Tailwind 4 for its base reset only. Type is all Geist: Black for headlines and titles, Sans for text, Mono for the terminal details |
 | Data | Files in [`data/`](data/), no database |
 | Tooling | Node scripts, `playwright-core` driving your installed Chrome for screenshots |
 | Hosting | Vercel, with every push to `main` deployed to production |
 
 ```
-app/            page, layout, 404, preview image, icons, calendar file route
-components/     hero pieces, event guide, project cards, countdown terminal, scroll animations
+app/            page, layout, 404, preview images, icons, calendar file route, project pages (p/[slug])
+components/     hero pieces, event guide, project cards, wall toolbar and tour, countdown terminal, scroll animations
 data/           event.ts (event info) + projects.json (the wall)
 docs/images/    screenshots used in this README
 lib/            project sorting, calendar links, shared types
