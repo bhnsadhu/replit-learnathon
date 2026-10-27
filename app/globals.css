@@ -1449,12 +1449,12 @@ footer a {
     animation: 2s ease-in-out 1.5s infinite bob;
   }
 
-  /* everything below the hero rises in on scroll (Reveal.tsx adds .in) */
-  .reveal-ready :is(.wallHeader, .guideCard, .card, footer > *):not(.in) {
+  /* everything below the hero rises in on scroll (Reveal.tsx adds data-in) */
+  .reveal-ready :is(.wallHeader, .guideCard, .card, footer > *):not([data-in]) {
     opacity: 0;
   }
 
-  .reveal-ready :is(.wallHeader, .guideCard, .card, footer > *).in {
+  .reveal-ready :is(.wallHeader, .guideCard, .card, footer > *)[data-in] {
     animation: 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms) both rise;
   }
 }

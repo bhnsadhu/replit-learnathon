@@ -21,7 +21,8 @@ export function Reveal() {
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
-          e.target.classList.add("in");
+          // a data attribute, not a class: React rewrites className on re-render and would drop it
+          (e.target as HTMLElement).dataset.in = "";
           io.unobserve(e.target);
         }
       },
