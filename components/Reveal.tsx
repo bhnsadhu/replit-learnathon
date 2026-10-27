@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 /** Things that rise into view on scroll. Hero has its own load-in animation in CSS. */
-const SELECTOR = ".wallHeader, .guideCard, .card, footer > *";
+const SELECTOR = ".wallHeader, .wallBar, .guideCard, .card, footer > *";
 
 export function Reveal() {
   useEffect(() => {

@@ -1276,10 +1276,11 @@ a.creator:hover {
   width: 32px;
 }
 
+/* slides in from the side you're heading towards (Tour.tsx sets --dir) */
 @keyframes tourIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    translate: calc(var(--dir, 1) * 32px) 0;
   }
 }
 
@@ -1894,6 +1895,24 @@ footer a {
   }
 }
 
+/* lands with a slight overshoot, like a stamp or a sticker */
+@keyframes stamp {
+  from {
+    opacity: 0;
+    scale: 1.7;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes pop {
+  50% {
+    scale: 1.12;
+  }
+}
+
 @keyframes bob {
   50% {
     translate: 0 5px;
@@ -1943,12 +1962,68 @@ footer a {
   }
 
   /* everything below the hero rises in on scroll (Reveal.tsx adds data-in) */
-  .reveal-ready :is(.wallHeader, .guideCard, .card, footer > *):not([data-in]) {
+  .reveal-ready :is(.wallHeader, .wallBar, .guideCard, .card, footer > *):not([data-in]) {
     opacity: 0;
   }
 
-  .reveal-ready :is(.wallHeader, .guideCard, .card, footer > *)[data-in] {
+  .reveal-ready :is(.wallHeader, .wallBar, .guideCard, .card, footer > *)[data-in] {
     animation: 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms) both rise;
+  }
+
+  /* winner ribbons stamp on once their card has landed */
+  .reveal-ready .card[data-in] .award {
+    animation: 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) calc(var(--d, 0ms) + 0.45s) both stamp;
+  }
+
+  .card.picked:after {
+    animation: 0.4s cubic-bezier(0.3, 1.4, 0.5, 1) both stamp;
+  }
+
+  [data-state="copied"] {
+    animation: 0.3s ease-out pop;
+  }
+
+  .tour,
+  .noMatch {
+    animation: 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both rise;
+  }
+
+  /* the info column follows the screen in, line by line */
+  .tourInfo > * {
+    animation: 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both rise;
+  }
+
+  .tourInfo > :nth-child(2) {
+    animation-delay: 0.05s;
+  }
+
+  .tourInfo > :nth-child(3) {
+    animation-delay: 0.1s;
+  }
+
+  .tourInfo > :nth-child(4) {
+    animation-delay: 0.15s;
+  }
+
+  .tourInfo > :nth-child(5) {
+    animation-delay: 0.2s;
+  }
+
+  .tourInfo > :nth-child(6) {
+    animation-delay: 0.25s;
+  }
+
+  /* project page loads in top to bottom, like the hero */
+  .placard :is(.placardTop, .tourStage, .placardNav) {
+    animation: 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both rise;
+  }
+
+  .placard .tourStage {
+    animation-delay: 0.1s;
+  }
+
+  .placard .placardNav {
+    animation-delay: 0.3s;
   }
 }
 

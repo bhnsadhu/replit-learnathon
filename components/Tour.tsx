@@ -21,9 +21,14 @@ export function Tour({
   children: React.ReactNode;
 }) {
   const [playing, setPlaying] = useState(true);
+  // which way the next stage slides in from: 1 = forward (from the right), -1 = back
+  const [dir, setDir] = useState(1);
   const n = items.length;
   const current = items[index].key;
-  const go = (i: number) => onIndex((i + n) % n);
+  const go = (i: number) => {
+    setDir(i < index ? -1 : 1);
+    onIndex((i + n) % n);
+  };
 
   // reduced-motion users get a manual slideshow (and the global rule kills the timer animation anyway)
   useEffect(() => {
@@ -45,7 +50,12 @@ export function Tour({
 
   return (
     <section className="tour" aria-roledescription="carousel" aria-label="Project tour">
-      <div className="tourStage" key={current} aria-live={playing ? "off" : "polite"}>
+      <div
+        className="tourStage"
+        key={current}
+        style={{ "--dir": dir } as React.CSSProperties}
+        aria-live={playing ? "off" : "polite"}
+      >
         {children}
       </div>
 

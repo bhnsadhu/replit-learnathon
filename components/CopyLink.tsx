@@ -18,7 +18,7 @@ export function CopyLink({ slug, className = "copyLink" }: { slug: string; class
   };
 
   return (
-    <button type="button" className={className} onClick={copy} aria-live="polite">
+    <button type="button" className={className} onClick={copy} aria-live="polite" data-state={state}>
       {state === "copied" ? "COPIED ✓" : state === "failed" ? "COPY FAILED" : "COPY LINK"}
     </button>
   );
