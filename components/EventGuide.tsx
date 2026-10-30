@@ -38,7 +38,7 @@ export function EventGuide() {
   return (
     <section className="guide" id="guide" aria-label="Event guide">
       <div className="wallHeader">
-        <p>EVENT GUIDE</p>
+        <h2>EVENT GUIDE</h2>
         <span>
           {event.dateLabel.toUpperCase()} // {event.time} // {event.location.toUpperCase()}
         </span>

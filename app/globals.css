@@ -6,6 +6,7 @@
   --navy: #13294b; /* Illini blue */
   --orange: #ff5f05; /* Illini orange */
   --blue: #1d58a7; /* Arches blue */
+  --altgeld: #c84113; /* Illinois Altgeld: orange for small text on white (5.0:1; Illini orange is 2.9:1) */
   --paper: #eef1f5; /* cloud */
   --card: #fff;
   --muted: #4a5568;
@@ -28,6 +29,20 @@ body {
   color: var(--ink);
   margin: 0;
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+input {
+  caret-color: var(--orange);
+}
+
+p,
+dd {
+  text-wrap: pretty;
 }
 
 /* film grain */
@@ -66,6 +81,11 @@ main {
   min-width: 760px;
   padding-right: 0.6em;
   animation: 22s linear infinite marquee;
+}
+
+/* hover holds it still for anyone trying to read it */
+.ticker:hover span {
+  animation-play-state: paused;
 }
 
 /* ---------- hero ---------- */
@@ -227,7 +247,8 @@ main {
   transition: all 0.18s;
   display: block;
   transform: rotate(8deg);
-  animation: 4s ease-in-out 1.5s infinite nudge;
+  /* three wiggles to say "clickable", then it rests */
+  animation: 4s ease-in-out 1.5s 3 nudge;
 }
 
 .eventSticker > span {
@@ -346,7 +367,7 @@ main {
 }
 
 .eventFacts dt {
-  color: var(--orange);
+  color: var(--altgeld);
   letter-spacing: 0.08em;
   font-weight: 900;
 }
@@ -627,7 +648,8 @@ h1 .accent {
   display: flex;
 }
 
-.wallHeader p {
+.wallHeader h2 {
+  font: inherit;
   margin: 0;
 }
 
@@ -717,7 +739,7 @@ h1 .accent {
   background: var(--orange);
   border: 2px solid;
   padding: 5px 7px;
-  font: 800 10px var(--font-mono), monospace;
+  font: 800 11px var(--font-mono), monospace;
   position: absolute;
   bottom: 8px;
   right: 8px;
@@ -728,7 +750,7 @@ h1 .accent {
   padding: 21px 20px 94px;
 }
 
-.card h2 {
+.card h3 {
   font-weight: 900;
   letter-spacing: -0.045em;
   text-transform: uppercase;
@@ -751,7 +773,7 @@ h1 .accent {
 .launch {
   letter-spacing: 0.06em;
   color: var(--blue);
-  font: 900 10px var(--font-mono), monospace;
+  font: 900 11px var(--font-mono), monospace;
   position: absolute;
   bottom: 62px;
   left: 20px;
@@ -869,26 +891,27 @@ a.creator:hover {
   color: var(--paper);
 }
 
+/* static: six cursors blinking in sync is noise, the hero terminal keeps the one live cursor */
 .slotScreen em {
   color: var(--orange);
   font-style: normal;
-  animation: 0.8s steps(2, end) infinite blink;
 }
 
 .card.slot .launch {
-  color: var(--orange);
+  color: var(--altgeld);
 }
 
 .card.slot:hover .launch {
   color: var(--blue);
 }
 
-.card.slot h2 {
-  color: #13294b66;
+/* ghosted, but still 4:1 on white for large text */
+.card.slot h3 {
+  color: #13294b99;
 }
 
 .card.slot .creator {
-  color: #13294b88;
+  color: var(--muted-2);
   border-style: dashed;
   background: transparent;
 }
@@ -905,7 +928,7 @@ a.creator:hover {
   letter-spacing: 0.08em;
   cursor: pointer;
   padding: 0 10px;
-  font: 800 10px var(--font-mono), monospace;
+  font: 800 11px var(--font-mono), monospace;
   position: absolute;
   top: 0;
   right: 0;
@@ -969,7 +992,7 @@ a.creator:hover {
 }
 
 .wallSearch input::placeholder {
-  color: var(--faint);
+  color: var(--muted-2);
 }
 
 .viewToggle {
@@ -1151,7 +1174,7 @@ a.creator:hover {
   transform: rotate(-3deg);
 }
 
-.tourInfo :is(h1, h2) {
+.tourInfo :is(h1, h3) {
   font-family: var(--font-display), Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   letter-spacing: -0.04em;
@@ -1263,8 +1286,8 @@ a.creator:hover {
   cursor: pointer;
   background: #eef1f540 content-box;
   width: 18px;
-  height: 14px;
-  padding: 5px 0;
+  height: 24px;
+  padding: 10px 0;
   transition: all 0.18s;
 }
 
@@ -1462,7 +1485,7 @@ a.creator:hover {
   letter-spacing: 0.08em;
   align-self: flex-start;
   padding: 5px 8px;
-  font: 900 10px var(--font-mono), monospace;
+  font: 900 11px var(--font-mono), monospace;
 }
 
 .stepTag.req {
@@ -1493,7 +1516,7 @@ a.creator:hover {
 }
 
 .stepBtn.off {
-  color: var(--faint);
+  color: var(--muted-2);
   box-shadow: none;
   background: none;
   border-style: dashed;
@@ -1573,7 +1596,7 @@ a.creator:hover {
 }
 
 .itinList b {
-  color: var(--orange);
+  color: var(--altgeld);
 }
 
 .itinList small,
@@ -1766,7 +1789,7 @@ footer a {
 
   .signal {
     max-width: 100%;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.35;
   }
 

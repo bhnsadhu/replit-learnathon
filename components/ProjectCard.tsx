@@ -49,7 +49,7 @@ export function ProjectCard({
           <span className="screenLabel">{buildLabel(index)}</span>
         </div>
         <div className="cardBody">
-          <h2>{project.title}</h2>
+          <h3>{project.title}</h3>
           <p>{project.description}</p>
           <span className="launch">LAUNCH PROJECT ↗</span>
         </div>
@@ -107,7 +107,7 @@ export function SlotCard({
         <span className="screenLabel">{buildLabel(index)}</span>
       </div>
       <div className="cardBody">
-        <h2>Your build here</h2>
+        <h3>Your build here</h3>
         <p>This slot is reserved. Ship something on Nov 7 and it lands on the wall.</p>
         {href && <span className="launch">{label}</span>}
       </div>

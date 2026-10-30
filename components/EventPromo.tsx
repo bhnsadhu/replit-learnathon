@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { event, signupForm } from "@/data/event";
 import { googleCalendarUrl, icsPath } from "@/lib/calendar";
 import { ReplitMark } from "./ReplitMark";
@@ -8,22 +8,53 @@ import { ReplitMark } from "./ReplitMark";
 export function EventPromo() {
   const prizes = event.prizes;
   const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const sticker = useRef<HTMLButtonElement>(null);
+
+  // Escape or a tap anywhere else closes it, like any popover
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      sticker.current?.focus();
+    };
+    const onDown = (e: PointerEvent) => {
+      if (!root.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onDown);
+    };
+  }, [open]);
 
   return (
-    <div className={open ? "eventPromo open" : "eventPromo"}>
+    <div className={open ? "eventPromo open" : "eventPromo"} ref={root}>
       <button
         type="button"
         className="eventSticker"
-        aria-label="Show event details"
+        ref={sticker}
         aria-expanded={open}
+        aria-controls="event-details"
         onClick={() => setOpen((o) => !o)}
       >
-        <span>{"{ build day: nov 7 }"}</span>
+        {/* the visible words are the accessible name; the braces are decoration */}
+        <span>
+          <span aria-hidden="true">{"{ "}</span>build day: nov 7<span aria-hidden="true">{" }"}</span>
+        </span>
         <small>
-          <i aria-hidden="true">▾</i> {open ? "CLICK TO CLOSE" : "CLICK FOR DETAILS"}
+          <i aria-hidden="true">▾</i> {open ? "CLOSE" : "SEE DETAILS"}
         </small>
       </button>
-      <div className="eventPopover" role="dialog" data-lenis-prevent aria-label={`${event.name} details`}>
+      <div
+        className="eventPopover"
+        id="event-details"
+        role="dialog"
+        data-lenis-prevent
+        aria-label={`${event.name} details`}
+      >
         <div className="eventInfo">
           <span className="eventPill">LEARNATHON</span>
           <strong>{event.name}</strong>
@@ -55,7 +86,7 @@ export function EventPromo() {
                 : prizes.map((p) => (
                     <span key={p.name} style={{ display: "block" }}>
                       {p.name}
-                      {p.reward ? ` — ${p.reward}` : ""}
+                      {p.reward ? ` · ${p.reward}` : ""}
                     </span>
                   ))}
             </dd>

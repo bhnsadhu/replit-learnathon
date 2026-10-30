@@ -8,14 +8,14 @@ export function ProjectStage({
   number,
   position,
   total,
-  Heading = "h2",
+  Heading = "h3",
 }: {
   project: Project;
   /** Position on the full wall, so BUILD_07 stays BUILD_07 while searching */
   number: number;
   position: number;
   total: number;
-  Heading?: "h1" | "h2";
+  Heading?: "h1" | "h3";
 }) {
   return (
     <>
@@ -108,7 +108,7 @@ export function SlotStage({
             · {position + 1} OF {total}
           </span>
         </p>
-        <h2 className="tourSlotTitle">Your build here</h2>
+        <h3 className="tourSlotTitle">Your build here</h3>
         <p className="tourDesc">This slot is reserved. Ship something on Nov 7 and it lands on the wall.</p>
         <p className="tourBy">BY YOU, PROBABLY</p>
         {href && (

@@ -75,7 +75,7 @@ export default function Home() {
 
       <section className="wall" id="projects" aria-label="Learnathon project showcase">
         <div className="wallHeader">
-          <p>PROJECT DIRECTORY</p>
+          <h2>PROJECT DIRECTORY</h2>
           <span>
             {live
               ? `${count} BUILDS${winners ? ` · ${winners} WINNER${winners === 1 ? "" : "S"}` : ""} // ${event.dateShort}`
