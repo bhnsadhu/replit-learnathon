@@ -197,7 +197,7 @@ When the link is texted (iMessage, WhatsApp) or posted (Instagram bio, Discord, 
 | [`app/favicon.ico`](app/favicon.ico) | Browser tab icon (official Illinois Block I from cdn.brand.illinois.edu) |
 | [`app/apple-icon.png`](app/apple-icon.png) | iPhone icon, used for Messages previews and home-screen shortcuts |
 
-Apps cache previews, so after changing them, test with a fresh link such as `https://learnathon.bhanusadhu.com/?v=2`, or use [opengraph.xyz](https://www.opengraph.xyz).
+Apps cache previews, so after changing them, test with a fresh link such as `https://learnathon.bhanusadhu.com/?v=2`, or paste it into a link-preview checker such as opengraph.xyz.
 
 ## Moving to a new domain
 
@@ -240,4 +240,6 @@ The screenshot script needs Google Chrome installed; it does not download a brow
 
 ## Credits
 
-Built for [Disruption Lab @ UIUC](https://giesgroups.illinois.edu/disruptionlab/home/) and Replit.
+Built for Disruption Lab @ UIUC and Replit.
+
+Designed and built by me, [Bhanu Sadhu](https://bhanusadhu.com), in my role as Replit's Product Strategy & Development Consultant at UIUC.
