@@ -117,6 +117,12 @@ export default function Home() {
               REPOSITORY ↗
             </a>
           </nav>
+          <p className="siteCredit">
+            Site designed and built by{" "}
+            <a href="https://bhanusadhu.com" target="_blank" rel="noreferrer">
+              BHANU SADHU ↗
+            </a>
+          </p>
         </div>
         <a href="#">BACK TO TOP ↑</a>
       </footer>
