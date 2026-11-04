@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { event } from "@/data/event";
 import { projects } from "@/lib/projects";
@@ -40,6 +40,9 @@ const title = live
 const description = live
   ? `${projects.length} live apps built at the ${event.name} at ${event.school}. Click through and try them.`
   : `Free build day, no coding experience needed | Sat Nov 7, 12 to 2:45 PM | ${event.location} | Every app built lands on the wall.`;
+
+// The browser chrome takes the page's Illini blue.
+export const viewport: Viewport = { themeColor: "#13294B" };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
