@@ -11,6 +11,8 @@ The website for the **Disruption Lab × Replit Learnathon**, a free, no experien
 
 **See it live: [learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)**
 
+**My role:** I conceived the learnathon and designed and built this site as Replit's Product Strategy & Development Consultant at UIUC, through Disruption Lab at Gies. The goal is AI fluency for beginners: everyone leaves with a working, published app built with Replit Agent.
+
 ![The landing page: Disruption Lab and Replit branding, a "Built with Replit" headline, a countdown terminal, and the sign-up button](docs/images/hero.png)
 
 ## At a glance
@@ -72,6 +74,20 @@ Event info and projects are plain files read at build time, so every change is a
 * **Honest empty states.** Unannounced details show "TBA" or "opens soon" rather than invented placeholders, and the wall shows six reserved "your build here" slots that link to sign-up, so the page works as a call to action before any app exists.
 * **The link is the marketing channel.** It gets texted and posted in bios, so the preview card is a product surface: pre-event it says "Free · No experience needed" and the date, post-event it shows the build count.
 * **Accessible by default.** Scroll and load-in animations switch off for anyone with reduced motion enabled.
+
+## How we'll know it worked
+
+The event is on Nov 7, 2026, so there are no numbers yet. The site is built so each step of the funnel can be counted from the forms and the wall:
+
+| Stage | Signal | Question it answers |
+| --- | --- | --- |
+| Interest | Interest form responses | Did the page and the link preview make people curious? |
+| Commitment | Pre-event registrations | How many interested students committed to a Saturday? |
+| Attendance | Check-ins on the day | How much of the registration turned up? |
+| **Shipping** | **Published apps on the wall** | **The north star: did beginners leave with something that works?** |
+| Sharing | Project page links shared after the event | Was the wall worth showing off? |
+
+The drop between attendance and shipping is the one to watch: it says whether a beginner can get from zero to a published Replit app in under three hours.
 
 ## Engineering
 
