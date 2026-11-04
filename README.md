@@ -77,7 +77,7 @@ Event info and projects are plain files read at build time, so every change is a
 
 ## How we'll know it worked
 
-The event is on Nov 7, 2026, so there are no numbers yet. The site is built so each step of the funnel can be counted from the forms and the wall:
+The event is on Nov 7, 2026, so there are no numbers yet. The site is built so each step of the funnel can be counted from the forms, the check-in at the door, and the wall:
 
 | Stage | Signal | Question it answers |
 | --- | --- | --- |
