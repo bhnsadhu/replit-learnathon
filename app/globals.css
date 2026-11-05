@@ -1701,14 +1701,6 @@ footer > div:first-child {
   display: flex;
 }
 
-/* The site's maker, quieter than the club's links above it. */
-.siteCredit {
-  font: 700 12px var(--font-mono), monospace;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.72;
-}
-
 footer > div:first-child b {
   font-weight: 900;
   color: var(--orange);
