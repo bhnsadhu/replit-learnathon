@@ -241,5 +241,3 @@ The screenshot script needs Google Chrome installed; it does not download a brow
 ## Credits
 
 Built for Disruption Lab @ UIUC and Replit.
-
-Designed and built by me, [Bhanu Sadhu](https://bhanusadhu.com), in my role as Replit's Product Strategy & Development Consultant at UIUC.
