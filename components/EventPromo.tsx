@@ -79,7 +79,10 @@ export function EventPromo() {
               </a>
             </dd>
             <dt>GUEST</dt>
-            <dd>{event.guest}</dd>
+            <dd>
+              {event.guest.name}
+              <small>{event.guest.role}</small>
+            </dd>
             <dt>FOOD</dt>
             <dd>{event.food ?? "To be announced"}</dd>
             <dt>AWARDS</dt>
@@ -88,7 +91,7 @@ export function EventPromo() {
                 ? "To be announced"
                 : prizes.map((p) => (
                     <span key={p.name} style={{ display: "block" }}>
-                      {p.name}
+                      {p.title ?? p.name}
                       {p.reward ? ` · ${p.reward}` : ""}
                     </span>
                   ))}

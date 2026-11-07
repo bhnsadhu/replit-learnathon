@@ -18,6 +18,9 @@ export type Project = {
 };
 
 export type Prize = {
+  /** What a project's `award` is set to. Can be followed by ": reason", e.g. "Honorable Mention: Funniest App". */
   name: string;
+  /** Heading in the guide, if different from `name` (e.g. plural). */
+  title?: string;
   reward?: string;
 };

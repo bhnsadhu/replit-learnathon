@@ -1,6 +1,6 @@
 import { event } from "@/data/event";
 import { googleCalendarUrl, icsPath } from "@/lib/calendar";
-import { projects } from "@/lib/projects";
+import { awardReason, projects, wonPrize } from "@/lib/projects";
 
 const STEPS = [
   {
@@ -88,7 +88,6 @@ export function EventGuide() {
               </p>
             </>
           )}
-          <p className="guestLine">Special guest: {event.guest}.</p>
           <div className="calRow">
             <a
               className="calBtn"
@@ -110,23 +109,21 @@ export function EventGuide() {
             <>
               <ul className="prizeList">
                 {prizes.map((prize) => {
-                  const winners = projects.filter(
-                    (p) => p.award === prize.name,
-                  );
+                  const winners = projects.filter((p) => wonPrize(p.award, prize.name));
                   return (
                     <li key={prize.name}>
-                      <b>🏆 {prize.name}</b>
+                      <b>🏆 {prize.title ?? prize.name}</b>
                       {prize.reward && <small>{prize.reward}</small>}
-                      {winners.map((winner) => (
-                        <a
-                          key={winner.slug}
-                          href={winner.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          → {winner.title} · {winner.creator.name}
-                        </a>
-                      ))}
+                      {/* opens the build's card on the wall (WallBrowser listens for data-open-build) */}
+                      {winners.map((winner) => {
+                        const reason = awardReason(winner.award!, prize.name);
+                        return (
+                          <a key={winner.slug} href={`#${winner.slug}`} data-open-build={winner.slug}>
+                            → {winner.title} · {winner.creator.name}
+                            {reason && <small>{reason}</small>}
+                          </a>
+                        );
+                      })}
                     </li>
                   );
                 })}
@@ -147,20 +144,22 @@ export function EventGuide() {
           )}
         </article>
 
-        <article className="guideCard">
-          <span className="infoLabel">FOOD</span>
-          {food ? (
-            <>
-              <p className="foodLine">{food}</p>
-              <p>{event.perks}</p>
-            </>
-          ) : (
-            <>
-              <span className="tba">TBA</span>
-              <p>There will be food. Menu coming soon.</p>
-            </>
-          )}
-        </article>
+        {/* two short cards share the third column so neither stretches to the tall ones */}
+        <div className="infoStack">
+          <article className="guideCard">
+            <span className="infoLabel">PERKS</span>
+            <p className="foodLine">{food ?? "Free lunch"}</p>
+            <p>{event.perks}</p>
+          </article>
+
+          <article className="guideCard">
+            <span className="infoLabel">SPECIAL GUEST</span>
+            <p className="foodLine">{event.guest.name}</p>
+            <p>
+              {event.guest.role}. {event.guest.detail}
+            </p>
+          </article>
+        </div>
 
         <article className="guideCard faqCard">
           <span className="infoLabel">FAQ</span>

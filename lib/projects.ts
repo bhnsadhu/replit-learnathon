@@ -2,9 +2,16 @@ import raw from "@/data/projects.json";
 import { event } from "@/data/event";
 import type { Project } from "./types";
 
+/** "Honorable Mention: Funniest App" belongs to the "Honorable Mention" prize. */
+export const wonPrize = (award: string | undefined, prize: string) =>
+  award === prize || Boolean(award?.startsWith(`${prize}:`));
+
+/** The text after "Prize name:", if any. */
+export const awardReason = (award: string, prize: string) => award.slice(prize.length + 1).trim();
+
 const prizeRank = (p: Project) => {
   if (!p.award) return Infinity;
-  const i = event.prizes.findIndex((prize) => prize.name === p.award);
+  const i = event.prizes.findIndex((prize) => wonPrize(p.award, prize.name));
   return i === -1 ? event.prizes.length : i;
 };
 

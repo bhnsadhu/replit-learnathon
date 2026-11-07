@@ -17,8 +17,8 @@ export function ProjectCard({
   project: Project;
   index: number;
   hidden?: boolean;
-  /** Just landed on by "Surprise me" */
-  picked?: boolean;
+  /** Tag on a highlighted card, e.g. "⤨ SURPRISE PICK". Unset = not highlighted. */
+  picked?: string;
 }) {
   const { creator } = project;
   const hasAvatar = Boolean(creator.avatar);
@@ -28,6 +28,7 @@ export function ProjectCard({
       id={project.slug}
       hidden={hidden}
       className={["card", project.award && "winner", picked && "picked"].filter(Boolean).join(" ")}
+      data-pick={picked}
       style={{ "--tilt": tiltFor(index) } as React.CSSProperties}
     >
       {project.award && <span className="award">🏆 {project.award.toUpperCase()}</span>}
@@ -91,7 +92,7 @@ export function SlotCard({
   index: number;
   href?: string | null;
   label: string;
-  picked?: boolean;
+  picked?: string;
 }) {
   const body = (
     <>
@@ -122,6 +123,7 @@ export function SlotCard({
     <article
       id={id}
       className={picked ? "card slot picked" : "card slot"}
+      data-pick={picked}
       style={{ "--tilt": tiltFor(index) } as React.CSSProperties}
       aria-label="Empty project slot"
     >

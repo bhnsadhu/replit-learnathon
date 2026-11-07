@@ -48,7 +48,7 @@ export const event = {
     { q: "Does it cost anything?", a: "No. It's free, and lunch is on us." },
     {
       q: "What do I get?",
-      a: "Free lunch, Replit credits and merch. The best builds split $150 in prizes.",
+      a: "Pizza + Coke, Replit credits and merch. The best builds split $150 in prizes.",
     },
     { q: "Who can come?", a: "Any UIUC student, any major, any skill level." },
     {
@@ -70,10 +70,14 @@ export const event = {
   },
 
   /** Special guest, shown in the details popover and the guide. */
-  guest: "Brandon Middleton, Head of Education at Replit",
+  guest: {
+    name: "Brandon Middleton",
+    role: "Head of Education at Replit",
+    detail: "Opens the day with a talk and a live demo of Replit Agent.",
+  },
 
-  /** What every attendee gets. */
-  perks: "Plus Replit credits and merch for every builder.",
+  /** What every attendee gets, on top of food. */
+  perks: "Lunch is on us. Plus Replit credits and merch for every builder.",
 
   /** e.g. { time: "12:00 PM", title: "Kickoff", detail: "Intro to Replit Agent" }. Empty = TBA. */
   itinerary: [
@@ -84,7 +88,7 @@ export const event = {
   ] as ItineraryItem[],
 
   /** e.g. "Pizza + drinks". null = TBA. */
-  food: "Free lunch" as string | null,
+  food: "Pizza + Coke" as string | null,
 
   /** In display order (Grand Prize first). Set a project's `award` to one of these names. Empty = TBA. */
   prizes: [
@@ -94,8 +98,12 @@ export const event = {
     { name: "Best Design & UX" },
     { name: "Best Business Potential" },
     { name: "Best Beginner Build" },
-    /** Can go to more than one build. */
-    { name: "Honorable Mention" },
+    /** Goes to a few builds, picked on the day. Set `award` to "Honorable Mention: <reason>". */
+    {
+      name: "Honorable Mention",
+      title: "Honorable Mentions",
+      reward: "A few more, picked on the day for standout builds.",
+    },
   ] as Prize[],
 };
 

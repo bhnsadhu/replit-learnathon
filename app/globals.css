@@ -1057,7 +1057,7 @@ a.creator:hover {
 }
 
 .card.picked:after {
-  content: "⤨ SURPRISE PICK";
+  content: attr(data-pick);
   z-index: 4;
   background: var(--ink);
   color: var(--orange);
@@ -1572,6 +1572,7 @@ a.creator:hover {
 }
 
 .foodLine {
+  color: var(--ink) !important;
   font-size: 18px !important;
   font-weight: 800;
 }
@@ -1605,15 +1606,28 @@ a.creator:hover {
   display: block;
 }
 
-.prizeNote,
-.guestLine {
+.prizeNote {
   margin-top: 14px;
+}
+
+.infoStack {
+  flex-direction: column;
+  gap: 42px;
+  display: flex;
+}
+
+.infoStack .guideCard {
+  flex: 1;
 }
 
 .prizeList li {
   border-bottom: 1px dashed #13294b40;
   padding-bottom: 10px;
   font: 14px/1.4 var(--font-mono), monospace;
+}
+
+.prizeList a small {
+  font-weight: 400;
 }
 
 .prizeList a {

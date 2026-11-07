@@ -10,6 +10,8 @@ import { Tour } from "./Tour";
 const matches = (p: Project, q: string) =>
   [p.title, p.description, p.creator.name, p.award ?? ""].some((f) => f.toLowerCase().includes(q));
 
+const SURPRISE = "⤨ SURPRISE PICK";
+
 type Slots = { count: number; href?: string | null; label: string };
 
 /**
@@ -20,7 +22,9 @@ export function WallBrowser({ projects, slots }: { projects: Project[]; slots: S
   const [query, setQuery] = useState("");
   const [view, setView] = useState<"wall" | "tour">("wall");
   const [tourIndex, setTourIndex] = useState(0);
-  const [picked, setPicked] = useState<string | null>(null);
+  // the highlighted card and the tag it wears
+  const [picked, setPicked] = useState<{ key: string; label: string } | null>(null);
+  const pickedTag = (key: string) => (picked?.key === key ? picked.label : undefined);
   const bar = useRef<HTMLDivElement>(null);
 
   const preview = projects.length === 0;
@@ -37,7 +41,7 @@ export function WallBrowser({ projects, slots }: { projects: Project[]; slots: S
   // the highlight is a one-shot flash
   useEffect(() => {
     if (!picked) return;
-    const t = setTimeout(() => setPicked(null), 2200);
+    const t = setTimeout(() => setPicked(null), picked.label === SURPRISE ? 2200 : 3200);
     return () => clearTimeout(t);
   }, [picked]);
 
@@ -51,13 +55,47 @@ export function WallBrowser({ projects, slots }: { projects: Project[]; slots: S
     if (wall && wall.getBoundingClientRect().top < 0) scrollToEl(wall);
   }, [view]);
 
+  // award links in the guide (and #slug links shared around) open that build's card on the wall
+  useEffect(() => {
+    const open = (slug: string) => {
+      const p = projects.find((it) => it.slug === slug);
+      if (!p) return false;
+      setView("wall");
+      setQuery("");
+      // short tag: winners already wear their award ribbon
+      setPicked({ key: slug, label: "★ THIS ONE" });
+      // wait a frame so a cleared search or the tour view has let the card back into the grid
+      requestAnimationFrame(() => {
+        const el = document.getElementById(slug);
+        if (el) scrollToEl(el);
+      });
+      return true;
+    };
+    // capture phase, so this runs before SmoothScroll's in-page link handler
+    const onClick = (e: MouseEvent) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element).closest?.<HTMLElement>("[data-open-build]");
+      if (!a || !open(a.dataset.openBuild!)) return;
+      e.preventDefault();
+      history.pushState(null, "", `#${a.dataset.openBuild}`);
+    };
+    const onHash = () => open(decodeURIComponent(location.hash.slice(1)));
+    document.addEventListener("click", onClick, true);
+    window.addEventListener("hashchange", onHash);
+    if (location.hash) onHash();
+    return () => {
+      document.removeEventListener("click", onClick, true);
+      window.removeEventListener("hashchange", onHash);
+    };
+  }, [projects]);
+
   const surprise = () => {
-    const current = view === "tour" ? items[tourAt]?.key : picked;
+    const current = view === "tour" ? items[tourAt]?.key : picked?.key;
     const pool = items.length > 1 ? items.filter((it) => it.key !== current) : items;
     const pick = pool[Math.floor(Math.random() * pool.length)];
     if (!pick) return;
     if (view === "tour") return setTourIndex(items.indexOf(pick));
-    setPicked(pick.key);
+    setPicked({ key: pick.key, label: SURPRISE });
     const el = document.getElementById(pick.key);
     if (el) scrollToEl(el);
   };
@@ -119,7 +157,7 @@ export function WallBrowser({ projects, slots }: { projects: Project[]; slots: S
                 index={i}
                 href={slots.href}
                 label={slots.label}
-                picked={picked === it.key}
+                picked={pickedTag(it.key)}
               />
             ))
           : projects.map((p, i) => (
@@ -128,7 +166,7 @@ export function WallBrowser({ projects, slots }: { projects: Project[]; slots: S
                 project={p}
                 index={i}
                 hidden={!visible.has(p.slug)}
-                picked={picked === p.slug}
+                picked={pickedTag(p.slug)}
               />
             ))}
       </div>
