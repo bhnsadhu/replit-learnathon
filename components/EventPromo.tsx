@@ -80,7 +80,9 @@ export function EventPromo() {
             </dd>
             <dt>GUEST</dt>
             <dd>
-              {event.guest.name}
+              <a className="guestLink" href={event.guest.linkedin} target="_blank" rel="noreferrer">
+                {event.guest.name} ↗
+              </a>
               <small>{event.guest.role}</small>
             </dd>
             <dt>FOOD</dt>

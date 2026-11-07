@@ -1620,6 +1620,84 @@ a.creator:hover {
   flex: 1;
 }
 
+.guest {
+  align-items: center;
+  gap: 14px;
+  display: flex;
+}
+
+.guest img {
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--orange);
+  object-fit: cover;
+  background: var(--paper);
+  flex: none;
+  width: 64px;
+  height: 64px;
+}
+
+.guest a {
+  font-family: var(--font-mono), monospace;
+  text-decoration: none;
+  display: block;
+}
+
+.guest a:hover {
+  color: var(--blue) !important;
+  text-decoration: underline;
+}
+
+.guest small {
+  color: var(--muted-2);
+  margin-top: 2px;
+  font: 12px/1.35 var(--font-mono), monospace;
+  display: block;
+}
+
+.guestLink {
+  color: var(--blue);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.guestLink:hover {
+  text-decoration: underline;
+}
+
+.prizeGroup summary {
+  cursor: pointer;
+  list-style: none;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  display: flex;
+}
+
+.prizeGroup summary::-webkit-details-marker {
+  display: none;
+}
+
+.prizeGroup summary small {
+  color: var(--blue) !important;
+  white-space: nowrap;
+  font-weight: 900;
+}
+
+.prizeGroup summary i {
+  font-style: normal;
+  transition: transform 0.18s;
+  display: inline-block;
+}
+
+.prizeGroup[open] summary i {
+  transform: rotate(180deg);
+}
+
+.prizeGroup summary:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
 .prizeList li {
   border-bottom: 1px dashed #13294b40;
   padding-bottom: 10px;

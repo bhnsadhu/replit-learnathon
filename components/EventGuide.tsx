@@ -110,20 +110,37 @@ export function EventGuide() {
               <ul className="prizeList">
                 {prizes.map((prize) => {
                   const winners = projects.filter((p) => wonPrize(p.award, prize.name));
+                  // opens the build's card on the wall (WallBrowser listens for data-open-build)
+                  const links = winners.map((winner) => {
+                    const reason = awardReason(winner.award!, prize.name);
+                    return (
+                      <a key={winner.slug} href={`#${winner.slug}`} data-open-build={winner.slug}>
+                        → {winner.title} · {winner.creator.name}
+                        {reason && <small>{reason}</small>}
+                      </a>
+                    );
+                  });
+                  const heading = `🏆 ${prize.title ?? prize.name}`;
                   return (
                     <li key={prize.name}>
-                      <b>🏆 {prize.title ?? prize.name}</b>
-                      {prize.reward && <small>{prize.reward}</small>}
-                      {/* opens the build's card on the wall (WallBrowser listens for data-open-build) */}
-                      {winners.map((winner) => {
-                        const reason = awardReason(winner.award!, prize.name);
-                        return (
-                          <a key={winner.slug} href={`#${winner.slug}`} data-open-build={winner.slug}>
-                            → {winner.title} · {winner.creator.name}
-                            {reason && <small>{reason}</small>}
-                          </a>
-                        );
-                      })}
+                      {winners.length > 1 ? (
+                        // several winners (honorable mentions): tap to see them, then pick one
+                        <details className="prizeGroup">
+                          <summary>
+                            <b>{heading}</b>
+                            <small>
+                              {winners.length} builds <i aria-hidden="true">▾</i>
+                            </small>
+                          </summary>
+                          {links}
+                        </details>
+                      ) : (
+                        <>
+                          <b>{heading}</b>
+                          {prize.reward && !winners.length && <small>{prize.reward}</small>}
+                          {links}
+                        </>
+                      )}
                     </li>
                   );
                 })}
@@ -154,10 +171,21 @@ export function EventGuide() {
 
           <article className="guideCard">
             <span className="infoLabel">SPECIAL GUEST</span>
-            <p className="foodLine">{event.guest.name}</p>
-            <p>
-              {event.guest.role}. {event.guest.detail}
-            </p>
+            <div className="guest">
+              <img src={event.guest.photo} alt={event.guest.name} width={64} height={64} />
+              <div>
+                <a className="foodLine" href={event.guest.linkedin} target="_blank" rel="noreferrer">
+                  {event.guest.name}
+                </a>
+                <small>{event.guest.role}</small>
+              </div>
+            </div>
+            <p>{event.guest.detail}</p>
+            <div className="calRow">
+              <a className="calBtn" href={event.guest.linkedin} target="_blank" rel="noreferrer">
+                LINKEDIN ↗
+              </a>
+            </div>
           </article>
         </div>
 

@@ -74,6 +74,9 @@ export const event = {
     name: "Brandon Middleton",
     role: "Head of Education at Replit",
     detail: "Opens the day with a talk and a live demo of Replit Agent.",
+    linkedin: "https://www.linkedin.com/in/brmiddle/",
+    /** Path under /public */
+    photo: "/guest/brandon-middleton.jpg",
   },
 
   /** What every attendee gets, on top of food. */
