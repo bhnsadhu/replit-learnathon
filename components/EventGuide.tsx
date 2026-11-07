@@ -78,15 +78,6 @@ export function EventGuide() {
           <span className="infoLabel">ITINERARY</span>
           {itinerary.length ? (
             <ol className="itinList">
-              {itinerary.map((item) => (
-                <li key={`${item.time}-${item.title}`}>
-                  <b>{item.time}</b>
-                  <span>
-                    {item.title}
-                    {item.detail && <small>{item.detail}</small>}
-                  </span>
-                </li>
-              ))}
               <li className="itinWhere">
                 <b>WHERE</b>
                 <span>
@@ -96,6 +87,15 @@ export function EventGuide() {
                   <small>{event.locationDetail}</small>
                 </span>
               </li>
+              {itinerary.map((item) => (
+                <li key={`${item.time}-${item.title}`}>
+                  <b>{item.time}</b>
+                  <span>
+                    {item.title}
+                    {item.detail && <small>{item.detail}</small>}
+                  </span>
+                </li>
+              ))}
             </ol>
           ) : (
             <>
