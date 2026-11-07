@@ -87,6 +87,15 @@ export function EventGuide() {
                   </span>
                 </li>
               ))}
+              <li className="itinWhere">
+                <b>WHERE</b>
+                <span>
+                  <a href={event.mapsUrl} target="_blank" rel="noreferrer">
+                    {event.location} ↗
+                  </a>
+                  <small>{event.locationDetail}</small>
+                </span>
+              </li>
             </ol>
           ) : (
             <>

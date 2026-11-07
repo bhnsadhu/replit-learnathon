@@ -1600,6 +1600,38 @@ a.creator:hover {
   color: var(--altgeld);
 }
 
+/* when the card is stretched to match its row, the rows share the extra height
+   instead of leaving a gap above the calendar buttons */
+.itinList {
+  flex: 1;
+}
+
+.itinList li {
+  flex: 1 1 auto;
+  align-content: center;
+}
+
+.prizeList {
+  flex: 1;
+}
+
+.prizeList li {
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+}
+
+.itinWhere a {
+  color: var(--blue);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.itinWhere a:hover {
+  text-decoration: underline;
+}
+
 .itinList small,
 .prizeList small {
   color: var(--muted-2);
