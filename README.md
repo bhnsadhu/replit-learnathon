@@ -121,7 +121,6 @@ public/         # Brand assets, headshots, project screenshots
 ## What's next
 
 Known limits:
-- The itinerary is still "TBA" until the organizers confirm it.
 - Updating the wall needs a local import and a redeploy, so builds appear in batches, not live.
 
 Next: open the post-event form, import the submissions after Nov 7, mark the winners, and report the funnel counts here.

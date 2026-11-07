@@ -86,9 +86,9 @@ export function EventGuide() {
                 Full schedule drops before Nov 7. Block off {event.time} at the{" "}
                 {event.location}.
               </p>
-              <p>Special guest: {event.guest}.</p>
             </>
           )}
+          <p className="guestLine">Special guest: {event.guest}.</p>
           <div className="calRow">
             <a
               className="calBtn"

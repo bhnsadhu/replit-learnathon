@@ -1588,7 +1588,7 @@ a.creator:hover {
 
 .itinList li {
   border-bottom: 1px dashed #13294b40;
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 104px 1fr;
   gap: 12px;
   padding-bottom: 10px;
   font: 14px/1.4 var(--font-mono), monospace;
@@ -1605,7 +1605,8 @@ a.creator:hover {
   display: block;
 }
 
-.prizeNote {
+.prizeNote,
+.guestLine {
   margin-top: 14px;
 }
 

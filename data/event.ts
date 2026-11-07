@@ -76,7 +76,12 @@ export const event = {
   perks: "Plus Replit credits and merch for every builder.",
 
   /** e.g. { time: "12:00 PM", title: "Kickoff", detail: "Intro to Replit Agent" }. Empty = TBA. */
-  itinerary: [] as ItineraryItem[],
+  itinerary: [
+    { time: "12:00–12:45", title: "Welcome, Replit intro, Brandon's talk + live demo" },
+    { time: "12:45–2:10", title: "Build time, lunch + hands-on support" },
+    { time: "2:10–2:20", title: "Publish and submit your app + post-event survey" },
+    { time: "2:20–2:45", title: "Showcase, awards + closing" },
+  ] as ItineraryItem[],
 
   /** e.g. "Pizza + drinks". null = TBA. */
   food: "Free lunch" as string | null,
