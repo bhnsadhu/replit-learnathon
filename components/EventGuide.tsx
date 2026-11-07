@@ -185,6 +185,13 @@ export function EventGuide() {
             <span className="infoLabel">PERKS</span>
             <p className="foodLine">{food ?? "Free lunch"}</p>
             <p>{event.perks}</p>
+            {event.creditsUrl && (
+              <div className="calRow">
+                <a className="calBtn" href={event.creditsUrl} target="_blank" rel="noreferrer">
+                  REDEEM REPLIT CREDITS ↗
+                </a>
+              </div>
+            )}
           </article>
 
           <article className="guideCard">
