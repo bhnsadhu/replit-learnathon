@@ -1,1 +1,253 @@
-[]
+[
+  {
+    "slug": "quantumchronicle",
+    "title": "QuantumChronicle",
+    "description": "Explore how a single decision ripples across time with an interactive 3D universe map that simulates alternative life paths, AI narratives, and parallel timelines.",
+    "url": "https://quantum-chronicle.replit.app/",
+    "creator": {
+      "name": "Mahi Madhan Kumar",
+      "linkedin": "https://www.linkedin.com/in/mahi-madhan-kumar/"
+    },
+    "award": "Most Innovative Idea",
+    "screenshot": "/project-shots/quantumchronicle.png"
+  },
+  {
+    "slug": "apartment-buddy",
+    "title": "Apartment-buddy",
+    "description": "I made an app which helps me manage groceries, laundry and delegate chores to my roomates.",
+    "url": "https://apartment-buddy.replit.app",
+    "creator": {
+      "name": "Vedansh Gupta",
+      "linkedin": "https://www.linkedin.com/in/vedanshgupta500/"
+    },
+    "screenshot": "/project-shots/apartment-buddy.png"
+  },
+  {
+    "slug": "studying-app",
+    "title": "Studying app",
+    "description": "Upload your notes and get personalized study problems",
+    "url": "https://algorithm-study-coach--arushis61.replit.app/",
+    "creator": {
+      "name": "Arushi Saurabh",
+      "linkedin": "https://www.linkedin.com/in/arushi-saurabh"
+    },
+    "screenshot": "/project-shots/studying-app.png"
+  },
+  {
+    "slug": "mindmap",
+    "title": "MindMap",
+    "description": "A psychology based app that helps users understand their thoughts and document their journey.",
+    "url": "https://mind-map-self-discovery-and-wellness.replit.app",
+    "creator": {
+      "name": "Emma Gadhiya",
+      "linkedin": "https://www.linkedin.com/in/emma-gadhiya-aa9958244"
+    },
+    "award": "Best Design & UX",
+    "screenshot": "/project-shots/mindmap.png"
+  },
+  {
+    "slug": "illini-match",
+    "title": "Illini Match",
+    "description": "Illini Match helps UIUC students 18+ connect through shared interests, dating preferences, and free time dates between classes.",
+    "url": "https://Illinimatchdemo.replit.app",
+    "creator": {
+      "name": "Kathryn Kina",
+      "linkedin": "https://www.linkedin.com/in/kathryn-kina"
+    },
+    "screenshot": "/project-shots/illini-match.png"
+  },
+  {
+    "slug": "common-ground",
+    "title": "Common Ground",
+    "description": "A website consolidating real news articles and political commentary from sources across the U.S. political spectrum, allowing users to explore how different outlets cover the same issues and to compare their framing and arguments.",
+    "url": "https://common--ground.replit.app/",
+    "creator": {
+      "name": "Abigail Wei",
+      "linkedin": "https://linkedin.com/in/abigail-wei"
+    },
+    "award": "Best Beginner Build",
+    "screenshot": "/project-shots/common-ground.png"
+  },
+  {
+    "slug": "sensorguard",
+    "title": "SensorGuard",
+    "description": "SensorGuard can be hooked up with an IMU (Inertial Measurement Unit) and be used to identify potential events such as stop detection or impact detection.",
+    "url": "https://sensor-guard-imu-event-detection.replit.app/",
+    "creator": {
+      "name": "Arshiya Kalra",
+      "linkedin": "https://linkedin.com/in/arshiya-kalra/"
+    },
+    "screenshot": "/project-shots/sensorguard.png"
+  },
+  {
+    "slug": "kartparty",
+    "title": "KartParty",
+    "description": "Interactive mario cart with phone controllers",
+    "url": "https://kart-party-1.replit.app",
+    "creator": {
+      "name": "Srikriti Mutyala",
+      "linkedin": "https://www.linkedin.com/in/srikritimutyala/"
+    },
+    "screenshot": "/project-shots/kartparty.png"
+  },
+  {
+    "slug": "healing-bites",
+    "title": "Healing Bites",
+    "description": "My website is a chatbot that allows users to input their mood, dietary restrictions, cravings, or preferences and matches them with a few recipes that match their needs.",
+    "url": "https://Healing-Bites.replit.app",
+    "creator": {
+      "name": "Sonia Yang",
+      "linkedin": "https://www.linkedin.com/in/sonia-yang-67b0a542b"
+    },
+    "award": "Best Social Impact",
+    "screenshot": "/project-shots/healing-bites.png"
+  },
+  {
+    "slug": "draw2play",
+    "title": "Draw2Play",
+    "description": "If you can draw it, you can play it.",
+    "url": "https://draw-2-play-canvas.replit.app",
+    "creator": {
+      "name": "Alexander Boukalis",
+      "linkedin": "https://linkedin.com/in/alexboukalis"
+    },
+    "screenshot": "/project-shots/draw2play.png"
+  },
+  {
+    "slug": "fit-check",
+    "title": "Fit Check",
+    "description": "pick a fit, get your cut, find items for your dream fit, pre-tailored to you.",
+    "url": "https://3-d-clothing-fit-studio.replit.app",
+    "creator": {
+      "name": "Zoya Khan",
+      "linkedin": "https://www.linkedin.com/in/the-zoyakhan"
+    },
+    "award": "Best Business Potential",
+    "screenshot": "/project-shots/fit-check.png"
+  },
+  {
+    "slug": "hub-time",
+    "title": "Hub Time",
+    "description": "Easy time reporting and analysis for the AI Hub as we work on a variety of client projects.",
+    "url": "https://gies-ai-hub-time-tracker.replit.app",
+    "creator": {
+      "name": "Adam King",
+      "linkedin": "https://www.linkedin.com/in/king-adam"
+    },
+    "screenshot": "/project-shots/hub-time.png"
+  },
+  {
+    "slug": "science-plainly-put",
+    "title": "Science, plainly put.",
+    "description": "Turn any research article or image from any discipline into digestible content.",
+    "url": "https://research-simplifier.replit.app",
+    "creator": {
+      "name": "Julia Dominiak",
+      "linkedin": "https://linkedin.com/in/julia-dominiak-b73747229"
+    },
+    "award": "Honorable Mention",
+    "screenshot": "/project-shots/science-plainly-put.png"
+  },
+  {
+    "slug": "illinihomes",
+    "title": "IlliniHomes",
+    "description": "A website that lists all apartment options on UIUC campus, allowing users to discover, shortlist/longlist options, review students' feedback, and locate the apartments on Maps.",
+    "url": "https://uiuc-apartment-finder.replit.app/",
+    "creator": {
+      "name": "Vy Chu",
+      "linkedin": "https://www.linkedin.com/in/vyxchuu"
+    },
+    "award": "Best Overall App",
+    "screenshot": "/project-shots/illinihomes.png"
+  },
+  {
+    "slug": "campus-event-hub",
+    "title": "campus event hub",
+    "description": "A one stop website that gathers all upcoming events in a calendar friendly view and imports from websites and slacks",
+    "url": "https://campus-event-hub.replit.app",
+    "creator": {
+      "name": "Jazlyn Teoh",
+      "linkedin": "https://www.linkedin.com/in/teoh-yu-xin/"
+    },
+    "screenshot": "/project-shots/campus-event-hub.png"
+  },
+  {
+    "slug": "internship-tracker",
+    "title": "Internship Tracker",
+    "description": "Track every internship application in one place and get new postings that match the roles you want.",
+    "url": "https://internship-navigator-hdaba.replit.app/",
+    "creator": {
+      "name": "Haya Dababneh",
+      "linkedin": "http://www.linkedin.com/in/haya-dababneh"
+    },
+    "screenshot": "/project-shots/internship-tracker.png"
+  },
+  {
+    "slug": "fridge-roulette",
+    "title": "Fridge Roulette",
+    "description": "Gives you easy to make recipes based on pictures of your ingredients/fridge/shelf. You can type in ingredients too.",
+    "url": "https://fridge-roulette-sanvigj2.replit.app",
+    "creator": {
+      "name": "Sanvi Joshi",
+      "linkedin": "https://www.linkedin.com/in/sanvi-joshi/"
+    },
+    "screenshot": "/project-shots/fridge-roulette.png"
+  },
+  {
+    "slug": "case-closed",
+    "title": "CASE CLOSED",
+    "description": "CASE CLOSED is an interactive murder mystery game where players crack four cases by matching livestream captions, searching a victim's phone, reconstructing a blackout, and tracing hotel keycard records to back up their accusations.",
+    "url": "https://CASE-CLOSED.replit.app",
+    "creator": {
+      "name": "Ishita Chaurasia",
+      "linkedin": "https://www.linkedin.com/in/ishita-chaurasia-a47517342"
+    },
+    "screenshot": "/project-shots/case-closed.png"
+  },
+  {
+    "slug": "portfolio-risks",
+    "title": "Portfolio Risks",
+    "description": "Allows users to construct a portfolio and analyze the risks of the portfolio.",
+    "url": "https://tutorial-dashboard-1-viyegbe2.replit.app/portfolio-lab/",
+    "creator": {
+      "name": "Aurel Viyegbe",
+      "linkedin": "https://www.linkedin.com/in/aurel-viyegbe"
+    },
+    "screenshot": "/project-shots/portfolio-risks.png"
+  },
+  {
+    "slug": "founder-discovery-hub",
+    "title": "Founder Discovery Hub",
+    "description": "Helps founders validate start up ideas with research and interview help",
+    "url": "https://founder-discovery-hub-liorakal.replit.app",
+    "creator": {
+      "name": "Liora Kalinovskiy",
+      "linkedin": "https://www.linkedin.com/in/liora-kalinovskiy"
+    },
+    "award": "Honorable Mention",
+    "screenshot": "/project-shots/founder-discovery-hub.png"
+  },
+  {
+    "slug": "weekdish",
+    "title": "Weekdish",
+    "description": "Help you decide recipes",
+    "url": "https://global-menu-planner.replit.app",
+    "creator": {
+      "name": "Iris Yao",
+      "linkedin": "https://www.linkedin.com/in/iris-hyyao"
+    },
+    "award": "Honorable Mention",
+    "screenshot": "/project-shots/weekdish.png"
+  },
+  {
+    "slug": "tech-portfolio-pinchia2",
+    "title": "tech-portfolio-pinchia2",
+    "description": "My interactive portfolio",
+    "url": "https://tech-portfolio-pinchia2.replit.app",
+    "creator": {
+      "name": "Alice Cheng",
+      "linkedin": "https://www.linkedin.com/in/alice-chengg/"
+    },
+    "screenshot": "/project-shots/tech-portfolio-pinchia2.png"
+  }
+]
