@@ -6,7 +6,7 @@
 
 **[Visit → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** · Saturday, Nov 7, 2026, CIF Monumental Steps.
 
-![Demo, recorded before the event: the hero counts down to build day, the event details open, the guide shows the three forms, the FAQ answers "Do I need coding experience?", and the project wall shows reserved "Your build here" slots, then tour mode steps through them](docs/images/demo.gif)
+![Demo, recorded before the event: the hero counts down to build day, the event details open, the guide shows the sign-up steps, the FAQ answers "Do I need coding experience?", and the project wall shows reserved "Your build here" slots, then tour mode steps through them](docs/images/demo.gif)
 
 ## The problem
 
@@ -17,19 +17,19 @@ The goal: **turn interest into sign-ups before Nov 7, and turn every app shipped
 ## How it works
 
 1. **Get interested.** The hero states the promise (one afternoon, zero experience, a live app) and counts down to build day. The details card has the time, place, calendar links and directions.
-2. **Sign up.** Three forms in order: an interest form open to anyone, a pre-event form required to attend, and a post-event form required to get on the wall.
+2. **Sign up.** Two steps in order: a Luma RSVP required to attend, and a post-event form required to get on the wall.
 3. **Build.** On the day, students build with Replit and publish their app.
 4. **Land on the wall.** Submissions are imported into the site, each live app is screenshotted, and the build gets a card, its own share page and, for winners, an award ribbon.
 5. **Browse.** Search the wall, let tour mode cycle through builds every 8 seconds on a big screen, or hit Surprise me.
 
-<p align="center"><img src="docs/images/guide.png" width="80%" alt="The event guide: three numbered forms (interest, pre-event, post-event), then itinerary, prizes, food and an FAQ"></p>
+<p align="center"><img src="docs/images/guide.png" width="80%" alt="The event guide: two numbered steps (Luma RSVP, post-event form), then itinerary, prizes, food and an FAQ"></p>
 
 ## Product decisions
 
 | Decision | Trade-off |
 | --- | --- |
 | **A static site fed by one JSON file, no database** | Updating the wall means importing and redeploying. In return there is nothing to log into and nothing to break on event day, and hosting is free. |
-| **Google Forms for sign-ups and submissions** | Exports are manual CSV downloads. But organizers already run forms there, students trust them, and uploads like headshots come for free. |
+| **Google Forms for submissions** | Exports are manual CSV downloads. But organizers already run forms there, students trust them, and uploads like headshots come for free. |
 | **The wall is live before the event, with reserved slots** | An empty wall looks bare. Showing "Your build here" slots makes the promise concrete, and each slot links to sign-up. |
 | **No form, no spot on the wall** | Some builds won't appear. The post-event form is how a student consents to being shown and gives the right link. |
 | **One config for the event** | Date, time, place, links and FAQ live in one file, so a change to the domain or time updates the page, the link previews and the calendar files together. |
@@ -71,8 +71,7 @@ The event hasn't happened yet, so there are no outcomes to report. What it will 
 
 | Step | Counted from |
 | --- | --- |
-| Interested | Interest form responses |
-| Signed up | Pre-event form responses |
+| Signed up | Luma RSVPs |
 | Shipped | Post-event form submissions |
 | On the wall | Projects in `data/projects.json` |
 
@@ -122,7 +121,7 @@ public/         # Brand assets, headshots, project screenshots
 ## What's next
 
 Known limits:
-- The itinerary, prizes and food are still "TBA" until the organizers confirm them.
+- The itinerary is still "TBA" until the organizers confirm it.
 - Updating the wall needs a local import and a redeploy, so builds appear in batches, not live.
 
-Next: open the pre- and post-event forms, import the submissions after Nov 7, mark the winners, and report the funnel counts here.
+Next: open the post-event form, import the submissions after Nov 7, mark the winners, and report the funnel counts here.

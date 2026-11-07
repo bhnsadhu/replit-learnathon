@@ -57,7 +57,7 @@ export default function Home() {
             {signupForm && (
               <a className="cta" href={signupForm} target="_blank" rel="noreferrer">
                 <span>I&apos;M IN</span>
-                {event.forms.pre ? "REGISTER (REQUIRED TO ATTEND)" : "FILL OUT THE INTEREST FORM"}
+                RSVP ON LUMA (REQUIRED TO ATTEND)
                 <b>↗</b>
               </a>
             )}

@@ -42,7 +42,8 @@ export function EventPromo() {
       >
         {/* the visible words are the accessible name; the braces are decoration */}
         <span>
-          <span aria-hidden="true">{"{ "}</span>build day: nov 7<span aria-hidden="true">{" }"}</span>
+          <span aria-hidden="true">{"{ "}</span>build day: nov 7
+          <span aria-hidden="true">{" }"}</span>
         </span>
         <small>
           <i aria-hidden="true">▾</i> {open ? "CLOSE" : "SEE DETAILS"}
@@ -77,6 +78,8 @@ export function EventPromo() {
                 + Apple / Outlook
               </a>
             </dd>
+            <dt>GUEST</dt>
+            <dd>{event.guest}</dd>
             <dt>FOOD</dt>
             <dd>{event.food ?? "To be announced"}</dd>
             <dt>AWARDS</dt>
@@ -89,18 +92,30 @@ export function EventPromo() {
                       {p.reward ? ` · ${p.reward}` : ""}
                     </span>
                   ))}
+              {prizes.length > 0 && (
+                <small>$150 in prizes, plus Replit credits + merch</small>
+              )}
             </dd>
           </dl>
           <span className="eventActions">
             {signupForm && (
               <a href={signupForm} target="_blank" rel="noreferrer">
-                {event.forms.pre ? "REGISTER ↗" : "I'M INTERESTED ↗"}
+                RSVP ↗
               </a>
             )}
-            <a className="secondary" href="#guide" onClick={() => setOpen(false)}>
+            <a
+              className="secondary"
+              href="#guide"
+              onClick={() => setOpen(false)}
+            >
               FULL GUIDE ↓
             </a>
-            <a className="secondary" href={event.mapsUrl} target="_blank" rel="noreferrer">
+            <a
+              className="secondary"
+              href={event.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               GET DIRECTIONS ↗
             </a>
           </span>

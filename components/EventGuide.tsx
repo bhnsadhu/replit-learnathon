@@ -4,20 +4,11 @@ import { projects } from "@/lib/projects";
 
 const STEPS = [
   {
-    key: "interest",
-    tag: "OPEN TO ANYONE",
-    title: "Interest form",
-    copy: "Curious? Drop your name and we'll keep you posted.",
-    cta: "FILL IT OUT ↗",
-    pending: "OPENS SOON",
-    required: false,
-  },
-  {
-    key: "pre",
+    key: "rsvp",
     tag: "REQUIRED TO ATTEND",
-    title: "Pre-event form",
-    copy: "Fill this out before Nov 7. You need it to come build with us.",
-    cta: "REGISTER ↗",
+    title: "RSVP on Luma",
+    copy: "Reserve your spot before Nov 7. Bring your laptop and an idea, we'll handle the rest.",
+    cta: "RSVP ↗",
     pending: "OPENS SOON",
     required: true,
   },
@@ -40,7 +31,8 @@ export function EventGuide() {
       <div className="wallHeader">
         <h2>EVENT GUIDE</h2>
         <span>
-          {event.dateLabel.toUpperCase()} // {event.time} // {event.location.toUpperCase()}
+          {event.dateLabel.toUpperCase()} // {event.time} //{" "}
+          {event.location.toUpperCase()}
         </span>
       </div>
 
@@ -50,11 +42,18 @@ export function EventGuide() {
           return (
             <article className="guideCard" key={step.key}>
               <span className="stepNum">{String(i + 1).padStart(2, "0")}</span>
-              <span className={step.required ? "stepTag req" : "stepTag"}>{step.tag}</span>
+              <span className={step.required ? "stepTag req" : "stepTag"}>
+                {step.tag}
+              </span>
               <h3>{step.title}</h3>
               <p>{step.copy}</p>
               {url ? (
-                <a className="stepBtn" href={url} target="_blank" rel="noreferrer">
+                <a
+                  className="stepBtn"
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {step.cta}
                 </a>
               ) : (
@@ -84,12 +83,19 @@ export function EventGuide() {
             <>
               <span className="tba">TBA</span>
               <p>
-                Full schedule drops before Nov 7. Block off {event.time} at the {event.location}.
+                Full schedule drops before Nov 7. Block off {event.time} at the{" "}
+                {event.location}.
               </p>
+              <p>Special guest: {event.guest}.</p>
             </>
           )}
           <div className="calRow">
-            <a className="calBtn" href={googleCalendarUrl} target="_blank" rel="noreferrer">
+            <a
+              className="calBtn"
+              href={googleCalendarUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               + GOOGLE CALENDAR
             </a>
             <a className="calBtn" href={icsPath} download>
@@ -101,26 +107,42 @@ export function EventGuide() {
         <article className="guideCard">
           <span className="infoLabel">PRIZES + AWARDS</span>
           {prizes.length ? (
-            <ul className="prizeList">
-              {prizes.map((prize) => {
-                const winner = projects.find((p) => p.award === prize.name);
-                return (
-                  <li key={prize.name}>
-                    <b>🏆 {prize.name}</b>
-                    {prize.reward && <small>{prize.reward}</small>}
-                    {winner && (
-                      <a href={winner.url} target="_blank" rel="noreferrer">
-                        → {winner.title} · {winner.creator.name}
-                      </a>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <>
+              <ul className="prizeList">
+                {prizes.map((prize) => {
+                  const winners = projects.filter(
+                    (p) => p.award === prize.name,
+                  );
+                  return (
+                    <li key={prize.name}>
+                      <b>🏆 {prize.name}</b>
+                      {prize.reward && <small>{prize.reward}</small>}
+                      {winners.map((winner) => (
+                        <a
+                          key={winner.slug}
+                          href={winner.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          → {winner.title} · {winner.creator.name}
+                        </a>
+                      ))}
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="prizeNote">
+                $150 in prizes. Winners get a 🏆 ribbon and the top spot on the
+                wall.
+              </p>
+            </>
           ) : (
             <>
               <span className="tba">TBA</span>
-              <p>Winners take home awards, plus a 🏆 ribbon and the top spot on the wall.</p>
+              <p>
+                Winners take home awards, plus a 🏆 ribbon and the top spot on
+                the wall.
+              </p>
             </>
           )}
         </article>
@@ -128,7 +150,10 @@ export function EventGuide() {
         <article className="guideCard">
           <span className="infoLabel">FOOD</span>
           {food ? (
-            <p className="foodLine">{food}</p>
+            <>
+              <p className="foodLine">{food}</p>
+              <p>{event.perks}</p>
+            </>
           ) : (
             <>
               <span className="tba">TBA</span>
