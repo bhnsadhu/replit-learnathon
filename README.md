@@ -1,127 +1,153 @@
-<p align="center"><img src="app/apple-icon.png" width="88" height="88" alt="The Illinois Block I icon, orange on Illini blue"></p>
+# UIUC Learnathon
 
-# Disruption Lab × Replit Learnathon
+**The event site for Disruption Lab × Replit's build day at UIUC: sign-up steps, schedule and awards before the event, a wall of every attendee's live app after it.**
 
-**The event site and project wall for a beginner AI build day at UIUC.** Before the event it gets students signed up; afterwards it becomes a public wall of every app they shipped with Replit.
+**[Try it → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** (free, no sign-in)
 
-**[Visit → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** · Saturday, Nov 7, 2026, CIF Monumental Steps.
-
-![Demo, recorded before the event: the hero counts down to build day, the event details open, the guide shows the sign-up steps, the FAQ answers "Do I need coding experience?", and the project wall shows reserved "Your build here" slots, then tour mode steps through them](docs/images/demo.gif)
+![30-second screen recording in dark mode: the build-day popover opens, the event guide scrolls past, then the project wall switches to tour mode and picks a random slot with Surprise Me](docs/images/demo.gif)
 
 ## The problem
 
-Most students have heard you can build an app with AI, but few have shipped one, and a club workshop usually ends with half-finished projects on laptops that nobody sees again. The Disruption Lab at Gies and Replit wanted an afternoon where anyone, with no coding experience, leaves with a live app. Every one of those apps should then have somewhere public to live.
+A three-hour build day for beginners produces a pile of Replit apps and nowhere to put them. The apps end up as links in a group chat, the organizers need a sign-up flow and a schedule in the meantime, and attendees who built something have no single page to share.
 
-The goal: **turn interest into sign-ups before Nov 7, and turn every app shipped that day into a link on the wall.**
+The goal: **every attendee who builds ends the day with a live app on one public wall, and a link they can send to anyone.**
 
 ## How it works
 
-1. **Get interested.** The hero states the promise (one afternoon, zero experience, a live app) and counts down to build day. The details card has the time, place, calendar links and directions.
-2. **Sign up.** Three required steps in order: a Luma RSVP, a pre-event form, and a post-event form at the end of the day that also puts the build on the wall.
-3. **Build.** On the day, students build with Replit and publish their app.
-4. **Land on the wall.** Submissions are imported into the site, each live app is screenshotted, and the build gets a card, its own share page and, for winners, an award ribbon.
-5. **Browse.** Search the wall, let tour mode cycle through builds every 8 seconds on a big screen, or hit Surprise me.
+1. **RSVP** on Luma. This is the headcount and is required to attend.
+2. **Pre-event form** (Google Form). Required, so the organizers know who is coming.
+3. **Build** with Replit at the CIF Monumental Steps, 12:45 to 2:10 PM, after a talk and live demo from Replit's Head of Education.
+4. **Submit your Replit link** in the post-event form at 2:10. No form, no spot on the wall.
+5. **Showcase**: the organizers import the responses, and the wall fills with one card per build. Winners get a ribbon and the top spots.
 
-<p align="center"><img src="docs/images/guide.png" width="80%" alt="The event guide: three numbered steps (Luma RSVP, pre-event form, post-event form), then itinerary, prizes, food and an FAQ"></p>
+![Event guide section: three numbered steps, itinerary with calendar buttons, prizes and awards, perks, guest card and FAQ](docs/images/guide.png)
 
 ## Product decisions
 
 | Decision | Trade-off |
 | --- | --- |
-| **A static site fed by one JSON file, no database** | Updating the wall means importing and redeploying. In return there is nothing to log into and nothing to break on event day, and hosting is free. |
-| **Google Forms for the pre-event form and submissions** | Exports are manual CSV downloads. But organizers already run forms there, students trust them, and uploads like headshots come for free. |
-| **The wall is live before the event, with reserved slots** | An empty wall looks bare. Showing "Your build here" slots makes the promise concrete, and each slot links to sign-up. |
-| **No form, no spot on the wall** | Some builds won't appear. The post-event form is how a student consents to being shown and gives the right link. |
-| **One config for the event** | Date, time, place, links and FAQ live in one file, so a change to the domain or time updates the page, the link previews and the calendar files together. |
-| **Built for a projector too** | Tour mode and Surprise me add code. But the wall gets shown on a screen during the event, so it needed to play by itself. |
+| **No database: content lives in two files and git** (`data/event.ts`, `data/projects.json`) | Updating the site means editing a file and pushing, not clicking in an admin panel. In return there is no backend to fail on event day, the whole site is static, and hosting costs $0. |
+| **Submissions go through a Google Form, not an in-app form** | An organizer runs one import command per batch instead of builds appearing live. In return there is no auth, no spam surface and no moderation queue to build. |
+| **Three required steps (RSVP, pre-form, post-form)** | More friction than one sign-up. The cost buys a headcount before the day and a Replit link from every attendee at 2:10, which is what fills the wall. |
+| **The wall opens before the event with 6 reserved slots** | A "your build here" placeholder is less honest than hiding the wall, but an empty page would not show what attendees are building toward. Search stays off until real builds exist. |
+| **Tour mode for the projector** | Auto-advances every 8 seconds with pause and arrow keys. It is built for the awards showcase, so the grid stays the default on phones. |
+| **Several winners can share "Honorable Mention"** | The award string is `Honorable Mention: <reason>`, so reasons can be decided on the day without a code change. Winners are listed in a dropdown in the guide. |
+
+![Project wall before the event: a search bar, wall and tour toggle, a Surprise Me button, and a grid of six reserved build slots](docs/images/wall.png)
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-  subgraph forms["Event day"]
+  subgraph Intake["Intake"]
     direction LR
-    form["Google Form<br/>post-event submissions"] --> csv["Responses CSV<br/>+ headshot uploads"]
+    form["Post-event<br/>Google Form"] --> csv["CSV export"] --> imp["import-form"] --> shots["screenshots"]
   end
-  subgraph pipe["Import, on a laptop"]
+  subgraph Source["Content"]
     direction LR
-    imp["import-form<br/>CSV to projects.json"] --> shots["screenshots<br/>Chrome captures each app"]
+    event["data/event.ts"] ~~~ json["data/projects.json"]
   end
-  subgraph site["Next.js on Vercel"]
+  subgraph Build["Next.js build"]
     direction LR
-    wall["Wall<br/>search, tour, surprise"] ~~~ pages["Project pages<br/>share images"] ~~~ cal["Calendar<br/>Google link, .ics"]
+    pages["Wall + /p/slug pages"] ~~~ og["Link-preview images"] ~~~ ics["learnathon.ics"]
   end
-  forms --> pipe
-  pipe -->|"commit and push"| site
+  subgraph Browser["Browser"]
+    direction LR
+    wall["Search, tour,<br/>surprise me"] ~~~ clock["Countdown"]
+  end
+  Intake --> Source --> Build --> Browser
 ```
 
-Every page, including one per project, is generated at build time from `data/event.ts` and `data/projects.json`. → [`data/event.ts`](data/event.ts), [`lib/projects.ts`](lib/projects.ts)
+Everything is prerendered at build time (7 routes, no server code at runtime). `import-form` and `screenshots` run on an organizer's laptop; Vercel rebuilds on every push to `main`. The only client-side state is the wall's search, view mode and the countdown.
 
 ## Hard problems
 
-**A form becomes a wall without a backend.** The importer turns the responses CSV into `projects.json` and matches headshot uploads back to their rows by the file names Google Forms gives them ("photo - Respondent Name.jpg"). Re-running it is safe: fields set by hand, like a winner's award and the screenshot path, are kept by slug, so organizers can import, pick winners and import again. → [`scripts/import-form.mjs`](scripts/import-form.mjs)
+**One source of truth for a page that changes state.** The site has to work as an invite before the event and a showcase after it, and every date, link and prize shows up in several places (hero, popover, guide, FAQ, calendar, link preview). All of it reads from [data/event.ts](data/event.ts). The Google Calendar link and the `.ics` file in [lib/calendar.ts](lib/calendar.ts) are generated from the same start and end timestamps, with RFC 5545 escaping and 75-octet line folding. The page title, link preview and hero copy switch on `projects.length`, so importing the first build flips the site from invite to showcase with no other change.
 
-**A screenshot of every live app.** Each card needs a picture of the app itself, not a logo. A script opens every submitted Replit link in the installed Chrome, captures it, and records the path. By default it only shoots projects that don't have one yet, and it can redo everything or a chosen few. → [`scripts/screenshots.mjs`](scripts/screenshots.mjs)
+**An importer that is safe to re-run.** Form exports are messy: quoted fields, newlines inside answers, duplicate submissions, and headshot uploads that Google names `<original name> - <Respondent Name>.jpg`. [scripts/import-form.mjs](scripts/import-form.mjs) has its own RFC 4180 parser, matches columns by header pattern, keeps the latest submission per project title, and matches uploads back to rows by respondent name. Re-running keeps `award` and `screenshot` fields already in `projects.json` (matched by slug), so organizers can import, set winners and import again. It reports unmatched columns and skipped rows instead of guessing.
 
-**Links that look right when shared.** Every build has its own static page with a generated preview image, so a student's link shows their project in a group chat, not the event. The event's own preview image uses the same type and optical alignment as the headline, and the calendar invite and Google Calendar link are generated from the same event config. → [`app/p/[slug]`](app/p/%5Bslug%5D)
+**Smooth scroll, scroll reveals and React fighting each other.** Combining Lenis, in-page anchors and React re-renders caused three problems, each fixed with a comment in the code:
+- Lenis's own `anchors` option does not cancel the browser's native jump, so the two animated against each other. [SmoothScroll.tsx](components/SmoothScroll.tsx) handles `#` links itself.
+- React rewrites `className` on re-render and would drop the "revealed" class and hide cards that had already animated in. [Reveal.tsx](components/Reveal.tsx) marks revealed elements with a `data-in` attribute.
+- Award links in the guide have to open a card in the wall, even from tour view or a filtered search. [WallBrowser.tsx](components/WallBrowser.tsx) listens in the capture phase so it runs before the scroll handler, clears search and switches back to the grid first.
+
+Users who prefer reduced motion get plain scrolling, no reveals and a tour that does not auto-advance.
 
 ## Results
 
-The event hasn't happened yet, so there are no outcomes to report. What it will be judged on is the funnel the site is built around:
+| Check | Result | What it means |
+| --- | --- | --- |
+| Lighthouse, desktop (live site) | **100 / 100 / 100 / 100** | Performance, accessibility, best practices, SEO. LCP **0.6 s**, CLS **0**. |
+| Lighthouse, mobile (live site) | **94 / 100 / 100 / 100** | Same four categories. LCP **3.0 s**, CLS **0**, TBT **10 ms**. |
+| `tsc --noEmit` | **0 errors** | The whole app is strict TypeScript. |
+| `next build` | **7 routes**, all static | No runtime server code to fail. |
 
-| Step | Counted from |
-| --- | --- |
-| RSVPed | Luma RSVPs |
-| Registered | Pre-event form responses |
-| Shipped | Post-event form submissions |
-| On the wall | Projects in `data/projects.json` |
+Scores come from Lighthouse 12 run against the production URL with its default throttling.
 
-Checked so far: the site builds statically, with a page per project. An accessibility and craft pass from a design audit covered contrast, focus and motion. Smooth scrolling and reveal animations respect reduced-motion settings.
+**Not measured yet:** there are no automated tests in this repo, so the importer and the award matching are checked by hand. There is no real-user data, since the event had not happened when this was written. Whether attendees actually submit a build, and how many, is the number that decides if the site worked.
 
 ## How it was built
 
-1. **The wall first.** A project data model, the event config, and a wall of project cards with empty slots in UIUC branding.
-2. **The pipeline.** The Google Form importer and the automatic screenshot script.
-3. **The event page.** Event guide, countdown, form links, calendar files, FAQ and Disruption Lab socials.
-4. **Identity.** The Illinois palette (Illini blue, orange accents), the Block I icon, and a headline tuned until it matched the link preview.
-5. **Browsing.** Wall search, tour mode, Surprise me and per-project share pages, then an accessibility and craft pass.
+1. **Wall first.** Scaffolded Next.js and Tailwind, defined the project data model, and built the card wall with reserved empty slots.
+2. **Import pipeline.** Wrote the Google Form CSV importer and a script that screenshots each submitted Replit app, so organizers never hand-edit the wall.
+3. **Event guide.** Added the countdown, FAQ, calendar links and the form steps, then moved the site to its own subdomain.
+4. **Brand and link previews.** Rebuilt the look in the Illinois palette after the first version sat too close to its reference, and made the link-preview image match the headline.
+5. **Wall tools.** Added search, tour mode, Surprise Me and a shareable page per build, plus the Lenis smooth-scroll and reveal motion.
+6. **Event-week details.** Swapped the interest form for a Luma RSVP, then added the itinerary, award categories with honorable mentions, perks and the guest card.
 
 ## Tech stack
 
 | Layer | Technology |
 | --- | --- |
-| Site | Next.js (App Router, static generation), React, TypeScript, Tailwind CSS |
-| Type and motion | Geist Sans and Mono, Lenis smooth scrolling |
-| Data | `data/event.ts`, `data/projects.json` from Google Forms |
-| Tooling | Node scripts, `playwright-core` with the installed Chrome |
-| Hosting | Vercel |
+| Frontend | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Geist fonts, Lenis |
+| Data | `data/event.ts` and `data/projects.json`, committed to git |
+| Scripts | Node: CSV importer, Playwright-based screenshot capture (uses installed Chrome) |
+| Link previews | `next/og` image routes for the site and for each build |
+| Hosting | **$0**: Vercel Hobby, deployed on push to `main` |
 
 ## Run it locally
 
 ```bash
 npm install
-npm run dev                                               # http://localhost:3000
+npm run dev                  # http://localhost:3000
+npx tsc --noEmit             # typecheck
+npm run build                # production build, must pass before pushing
+
+# After the event: turn the post-event form into the wall
 npm run import-form -- form-data/responses.csv --uploads form-data/uploads
-npm run screenshots                                       # capture apps missing a screenshot
-npm run build                                             # static build, one page per project
+npm run screenshots          # capture each live app (add --all to redo every one)
 ```
 
-Event details live in `data/event.ts`. Pushes to `main` deploy on Vercel.
+No environment variables are needed. `form-data/` is git-ignored because the raw export contains emails.
 
 ## Project structure
 
 ```
-app/            # The page, per-project pages, preview images, calendar file
-components/     # Wall browser, tour, project card, event guide, terminal hero
-data/           # Event config and projects.json
-lib/            # Project loading, calendar links, preview image helpers
-scripts/        # Form importer and screenshot capture
-public/         # Brand assets, headshots, project screenshots
+app/
+  page.tsx                  # hero, guide and wall in one page
+  p/[slug]/                 # one shareable page + link preview per build
+  learnathon.ics/           # calendar download
+components/
+  WallBrowser.tsx           # search, wall/tour toggle, Surprise Me, deep links
+  Tour.tsx                  # auto-advancing projector view
+  EventGuide.tsx            # steps, itinerary, prizes, perks, guest, FAQ
+data/
+  event.ts                  # every date, link, prize and FAQ answer
+  projects.json             # the builds (written by import-form)
+lib/                        # calendar + .ics, award matching, shared types
+scripts/                    # import-form.mjs, screenshots.mjs
+docs/images/                # README screenshots and demo
 ```
 
 ## What's next
 
-Known limits:
-- Updating the wall needs a local import and a redeploy, so builds appear in batches, not live.
+**Known limits**
+- Mobile LCP is **3.0 s**; I have not traced which element it is or fixed it.
+- No automated tests. The importer is the riskiest code and is only exercised by hand.
+- A build only appears after an organizer runs the import and pushes, so the wall is not live during the event.
+- Screenshots of builds are captured once. A Replit app that changes later keeps its old image.
 
-Next: import the submissions after Nov 7, mark the winners, and report the funnel counts here.
+**Next**
+- After the event, record submission rate (post-form responses out of RSVPs) and how many builds were live, and put those numbers here.
+- Add a fixture CSV and a test that the importer keeps awards across a re-import.
+- Trace and fix the mobile LCP.
