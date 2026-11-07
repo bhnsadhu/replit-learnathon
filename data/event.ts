@@ -53,20 +53,26 @@ export const event = {
     { q: "Who can come?", a: "Any UIUC student, any major, any skill level." },
     {
       q: "How do I sign up?",
-      a: "RSVP on Luma (step 01 above). It's required to attend.",
+      a: "RSVP on Luma, then fill out the pre-event form (steps 01 and 02 above). Both are required.",
     },
     {
       q: "How does my project get on the wall?",
-      a: "Publish your app on Replit, then submit the post-event form (step 02).",
+      a: "Publish your app on Replit, then submit the post-event form (step 03). Everyone fills it out at 2:10.",
     },
   ],
 
   /** Sign-up links. null = shows "opens soon". */
   forms: {
-    /** Luma RSVP. Required to attend. */
+    /** Luma RSVP. Required. */
     rsvp: "https://luma.com/vei2b7gt" as string | null,
-    /** Google Form. Required to get your build on the wall. */
-    post: null as string | null,
+    /** Google Form, before the event. Required. */
+    pre: "https://docs.google.com/forms/d/e/1FAIpQLSc21c8WoF-1-V1iz3byfTWJiTs9PG5Yp7hODP8SuR9RsUqg0A/viewform" as
+      | string
+      | null,
+    /** Google Form, at 2:10 on the day. Required, and it's how a build gets on the wall. */
+    post: "https://docs.google.com/forms/d/e/1FAIpQLSeDv1ETCDcHpNPI2XM758u5vAyUb7QZJAQIsAFjsET_JLL01w/viewform" as
+      | string
+      | null,
   },
 
   /** Special guest, shown in the details popover and the guide. */

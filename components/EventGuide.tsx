@@ -13,8 +13,17 @@ const STEPS = [
     required: true,
   },
   {
+    key: "pre",
+    tag: "REQUIRED · BEFORE NOV 7",
+    title: "Pre-event form",
+    copy: "Fill this out after you RSVP so we know who's coming. You need it to come build with us.",
+    cta: "FILL IT OUT ↗",
+    pending: "OPENS SOON",
+    required: true,
+  },
+  {
     key: "post",
-    tag: "REQUIRED FOR THE WALL",
+    tag: "REQUIRED · AT 2:10 PM",
     title: "Post-event form",
     copy: "Shipped something? Submit your Replit link. No form, no spot on the wall.",
     cta: "SUBMIT YOUR BUILD ↗",
