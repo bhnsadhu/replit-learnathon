@@ -2,9 +2,9 @@
 
 **The event site for Disruption Lab × Replit's build day at UIUC: sign-up steps, schedule and awards before the event, and one wall of 22 live student apps after it.**
 
-**[Try it → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** (free, no sign-in)
+**[Try it → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** (free, no sign-in). **The event is over (Nov 7):** the guide now reads as a recap and the wall is the main page.
 
-![32-second screen recording: the event guide scrolls into view, an award link opens the MindMap card on the wall, a search for "recipe" narrows 22 builds to 3, tour mode steps through full-screen builds, and Surprise Me picks a random card](docs/images/demo.gif)
+![32-second screen recording: the event recap scrolls into view, an award link opens the MindMap card on the wall, a search for "recipe" narrows 22 builds to 3, tour mode steps through full-screen builds, and Surprise Me picks a random card](docs/images/demo.gif)
 
 ## The problem
 
@@ -22,7 +22,7 @@ It worked: the post-event form got 26 responses from 24 people, and **22 unique 
 4. **Import.** An organizer exports the responses as CSV, runs `npm run import-form`, then `npm run screenshots`, sets winners in `data/projects.json` and pushes. Vercel redeploys.
 5. **Browse.** The wall has search, a tour mode for the projector and Surprise Me. Every build also has a shareable page at `/p/<slug>` with its own link preview.
 
-![Event guide: three numbered steps, itinerary with calendar buttons, prizes and awards linking to each winning build, perks, guest card and FAQ](docs/images/guide.png)
+![Event recap: three closed sign-up steps, how the day ran, prizes and winners linking to each winning build, perks, guest card and a past-tense FAQ](docs/images/guide.png)
 
 ## Product decisions
 
@@ -68,7 +68,7 @@ Everything is prerendered at build time: 51 static pages and no server code at r
 
 **22 headshots at up to 18 MB each, shown in a 43px circle.** The sheet only held Drive links, so the photos were downloaded from Drive through a logged-in browser. The largest original was 18.3 MB, and a plain center crop of a tall portrait showed the torso instead of the face. Apple's Vision framework found exactly one face in each of the 22 photos, each photo was cropped to a square centered on that face and resized to 256px, and the whole folder came to **288 KB**. Cards are styled in [ProjectCard.tsx](components/ProjectCard.tsx) and the images live in [public/avatars](public/avatars).
 
-**One source of truth for a page that changes state.** The site has to work as an invite before the event and a showcase after it, and every date, link and prize shows up in several places. All of it reads from [data/event.ts](data/event.ts). The Google Calendar link and the `.ics` download in [lib/calendar.ts](lib/calendar.ts) come from the same start and end timestamps, with RFC 5545 escaping and 75-octet line folding. The hero copy, wall header, footer and page title switch on `projects.length`, so importing the first build flipped the site from invite to showcase with no other change.
+**One source of truth for a page that changes state.** The site has to work as an invite before the event and a showcase after it, and every date, link and prize shows up in several places. All of it reads from [data/event.ts](data/event.ts). The Google Calendar link and the `.ics` download in [lib/calendar.ts](lib/calendar.ts) come from the same start and end timestamps, with RFC 5545 escaping and 75-octet line folding. The hero copy, wall header, footer and page title switch on `projects.length`, so importing the first build flipped the site from invite to showcase with no other change. A second flag, `eventOver` (true once `event.end` has passed), turns the rest into a recap: the status line says the event ended, the RSVP button becomes a link to the wall, the three sign-up steps are marked closed, and the calendar buttons and directions link are hidden.
 
 **Smooth scroll, scroll reveals and React fighting each other.** Three bugs, each fixed with a comment in the code:
 - Lenis's own `anchors` option does not cancel the browser's native jump, so the two animated against each other. [SmoothScroll.tsx](components/SmoothScroll.tsx) handles `#` links itself.
@@ -100,7 +100,7 @@ Users who prefer reduced motion get plain scrolling, no reveals and a tour that 
 3. **Branding churn.** The headline lockup, link preview and colors were redone several times. The palette moved to Illini blue and orange once the first one sat too close to the design that inspired it.
 4. **Event guide.** Added the countdown, Google Calendar and `.ics` buttons, FAQ, itinerary, perks, the guest card, Luma RSVP and the pre and post forms.
 5. **Wall features.** Added search, tour mode, Surprise Me, per-build share pages with their own link previews, and Lenis smooth scrolling.
-6. **Event day and after.** Set the awards, imported the 22 builds, took the screenshots and added the headshots. The first headshot crops were center-based and cut off faces, so they were redone around detected faces.
+6. **Event day and after.** Set the awards, imported the 22 builds, took the screenshots and added the headshots. The first headshot crops were center-based and cut off faces, so they were redone around detected faces. The site was then marked as ended: the guide became a recap and the sign-up buttons were retired.
 
 ## Tech stack
 

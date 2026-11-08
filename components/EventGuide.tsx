@@ -1,4 +1,4 @@
-import { event } from "@/data/event";
+import { event, eventOver } from "@/data/event";
 import { googleCalendarUrl, icsPath } from "@/lib/calendar";
 import { awardReason, projects, wonPrize } from "@/lib/projects";
 
@@ -11,6 +11,8 @@ const STEPS = [
     cta: "RSVP ↗",
     pending: "OPENS SOON",
     required: true,
+    overTag: "WAS REQUIRED TO ATTEND",
+    overCopy: "Attendees reserved their spot here before Nov 7. Registration is now closed.",
   },
   {
     key: "pre",
@@ -20,6 +22,8 @@ const STEPS = [
     cta: "FILL IT OUT ↗",
     pending: "OPENS SOON",
     required: true,
+    overTag: "WAS REQUIRED · BEFORE NOV 7",
+    overCopy: "Attendees filled this out after RSVPing so we knew who was coming to build.",
   },
   {
     key: "post",
@@ -29,6 +33,8 @@ const STEPS = [
     cta: "SUBMIT YOUR BUILD ↗",
     pending: "OPENS NOV 7",
     required: true,
+    overTag: "WAS REQUIRED · AT 2:10 PM",
+    overCopy: "Builders submitted their Replit link here. The submitted builds are on the wall below.",
   },
 ] as const;
 
@@ -38,8 +44,9 @@ export function EventGuide() {
   return (
     <section className="guide" id="guide" aria-label="Event guide">
       <div className="wallHeader">
-        <h2>EVENT GUIDE</h2>
+        <h2>{eventOver ? "EVENT RECAP" : "EVENT GUIDE"}</h2>
         <span>
+          {eventOver ? "EVENT ENDED // " : ""}
           {event.dateLabel.toUpperCase()} // {event.time} //{" "}
           {event.location.toUpperCase()}
         </span>
@@ -51,12 +58,14 @@ export function EventGuide() {
           return (
             <article className="guideCard" key={step.key}>
               <span className="stepNum">{String(i + 1).padStart(2, "0")}</span>
-              <span className={step.required ? "stepTag req" : "stepTag"}>
-                {step.tag}
+              <span className={step.required && !eventOver ? "stepTag req" : "stepTag"}>
+                {eventOver ? step.overTag : step.tag}
               </span>
               <h3>{step.title}</h3>
-              <p>{step.copy}</p>
-              {url ? (
+              <p>{eventOver ? step.overCopy : step.copy}</p>
+              {eventOver ? (
+                <span className="stepBtn off">CLOSED</span>
+              ) : url ? (
                 <a
                   className="stepBtn"
                   href={url}
@@ -75,7 +84,7 @@ export function EventGuide() {
 
       <div className="infoGrid">
         <article className="guideCard">
-          <span className="infoLabel">ITINERARY</span>
+          <span className="infoLabel">{eventOver ? "HOW THE DAY RAN" : "ITINERARY"}</span>
           {itinerary.length ? (
             <ol className="itinList">
               <li className="itinWhere">
@@ -106,23 +115,25 @@ export function EventGuide() {
               </p>
             </>
           )}
-          <div className="calRow">
-            <a
-              className="calBtn"
-              href={googleCalendarUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              + GOOGLE CALENDAR
-            </a>
-            <a className="calBtn" href={icsPath} download>
-              + APPLE / OUTLOOK
-            </a>
-          </div>
+          {!eventOver && (
+            <div className="calRow">
+              <a
+                className="calBtn"
+                href={googleCalendarUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                + GOOGLE CALENDAR
+              </a>
+              <a className="calBtn" href={icsPath} download>
+                + APPLE / OUTLOOK
+              </a>
+            </div>
+          )}
         </article>
 
         <article className="guideCard">
-          <span className="infoLabel">PRIZES + AWARDS</span>
+          <span className="infoLabel">{eventOver ? "PRIZES + WINNERS" : "PRIZES + AWARDS"}</span>
           {prizes.length ? (
             <>
               <ul className="prizeList">
@@ -164,8 +175,9 @@ export function EventGuide() {
                 })}
               </ul>
               <p className="prizeNote">
-                $150 in prizes. Winners get a 🏆 ribbon and the top spot on the
-                wall.
+                {eventOver
+                  ? "$150 in prizes. Winners wear a 🏆 ribbon and hold the top spot on the wall."
+                  : "$150 in prizes. Winners get a 🏆 ribbon and the top spot on the wall."}
               </p>
             </>
           ) : (
@@ -225,7 +237,7 @@ export function EventGuide() {
             ))}
           </dl>
           <p className="faqMore">
-            Still have questions? DM{" "}
+            {eventOver ? "Questions about the event? DM" : "Still have questions? DM"}{" "}
             <a href={links.instagram} target="_blank" rel="noreferrer">
               {links.instagramHandle}
             </a>{" "}

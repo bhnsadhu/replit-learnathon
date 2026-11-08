@@ -38,7 +38,7 @@ const title = live
   ? `Built with Replit | ${projects.length} builds from the ${event.school} Learnathon`
   : `${event.name} | Nov 7 @ ${event.school}`;
 const description = live
-  ? `${projects.length} live apps built at the ${event.name} at ${event.school}. Click through and try them.`
+  ? `The ${event.name} at ${event.school} was Nov 7 | ${projects.length} live apps were built in one afternoon. Click through and try them.`
   : `Free build day, no coding experience needed | Sat Nov 7, 12 to 2:45 PM | ${event.location} | Every app built lands on the wall.`;
 
 // The browser chrome takes the page's Illini blue.

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { event, signupForm } from "@/data/event";
+import { event, eventOver, signupForm } from "@/data/event";
 import { googleCalendarUrl, icsPath } from "@/lib/calendar";
 import { ReplitMark } from "./ReplitMark";
 
@@ -42,7 +42,8 @@ export function EventPromo() {
       >
         {/* the visible words are the accessible name; the braces are decoration */}
         <span>
-          <span aria-hidden="true">{"{ "}</span>build day: nov 7
+          <span aria-hidden="true">{"{ "}</span>
+          {eventOver ? "event ended: nov 7" : "build day: nov 7"}
           <span aria-hidden="true">{" }"}</span>
         </span>
         <small>
@@ -57,7 +58,7 @@ export function EventPromo() {
         aria-label={`${event.name} details`}
       >
         <div className="eventInfo">
-          <span className="eventPill">LEARNATHON</span>
+          <span className="eventPill">{eventOver ? "LEARNATHON · ENDED" : "LEARNATHON"}</span>
           <strong>{event.name}</strong>
           <dl className="eventFacts">
             <dt>DATE</dt>
@@ -69,15 +70,19 @@ export function EventPromo() {
               {event.location}
               <small>{event.locationDetail}</small>
             </dd>
-            <dt>SAVE IT</dt>
-            <dd className="calLinks">
-              <a href={googleCalendarUrl} target="_blank" rel="noreferrer">
-                + Google Calendar
-              </a>
-              <a href={icsPath} download>
-                + Apple / Outlook
-              </a>
-            </dd>
+            {!eventOver && (
+              <>
+                <dt>SAVE IT</dt>
+                <dd className="calLinks">
+                  <a href={googleCalendarUrl} target="_blank" rel="noreferrer">
+                    + Google Calendar
+                  </a>
+                  <a href={icsPath} download>
+                    + Apple / Outlook
+                  </a>
+                </dd>
+              </>
+            )}
             <dt>GUEST</dt>
             <dd>
               <a className="guestLink" href={event.guest.linkedin} target="_blank" rel="noreferrer">
@@ -103,32 +108,40 @@ export function EventPromo() {
             </dd>
           </dl>
           <span className="eventActions">
-            {signupForm && (
-              <a href={signupForm} target="_blank" rel="noreferrer">
-                RSVP ↗
+            {eventOver ? (
+              <a href="#projects" onClick={() => setOpen(false)}>
+                SEE THE BUILDS ↓
               </a>
+            ) : (
+              signupForm && (
+                <a href={signupForm} target="_blank" rel="noreferrer">
+                  RSVP ↗
+                </a>
+              )
             )}
             <a
               className="secondary"
               href="#guide"
               onClick={() => setOpen(false)}
             >
-              FULL GUIDE ↓
+              {eventOver ? "FULL RECAP ↓" : "FULL GUIDE ↓"}
             </a>
-            <a
-              className="secondary"
-              href={event.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GET DIRECTIONS ↗
-            </a>
+            {!eventOver && (
+              <a
+                className="secondary"
+                href={event.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GET DIRECTIONS ↗
+              </a>
+            )}
           </span>
         </div>
         <span className="eventArt" aria-hidden="true">
           <ReplitMark />
           <b>{event.dateStamp}</b>
-          <small>BUILD DAY</small>
+          <small>{eventOver ? "RECAP" : "BUILD DAY"}</small>
         </span>
       </div>
     </div>

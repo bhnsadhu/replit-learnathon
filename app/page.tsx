@@ -5,7 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Terminal } from "@/components/Terminal";
 import { WallBrowser } from "@/components/WallBrowser";
-import { event, signupForm } from "@/data/event";
+import { event, eventOver, signupForm } from "@/data/event";
 import { projects } from "@/lib/projects";
 
 const TICKER =
@@ -30,8 +30,11 @@ export default function Home() {
       <section className="hero">
         <BrandLockup />
         <div className="signalRow">
-          <a className="signal" href={event.mapsUrl} target="_blank" rel="noreferrer">
-            <i /> LIVE FROM THE {event.location.toUpperCase()} · NOV 7 · {event.time}
+          <a className={eventOver ? "signal over" : "signal"} href={event.mapsUrl} target="_blank" rel="noreferrer">
+            <i />{" "}
+            {eventOver
+              ? `EVENT ENDED · NOV 7 · ${event.location.toUpperCase()}`
+              : `LIVE FROM THE ${event.location.toUpperCase()} · NOV 7 · ${event.time}`}
             <b>↗</b>
           </a>
         </div>
@@ -50,19 +53,27 @@ export default function Home() {
           <p className="heroCopy">
             {live ? `${count} experiments. ${count} live builds.` : "One afternoon. Zero experience needed."}
             <br />
-            {live ? "One wall of ideas, all built by you." : "Bring an idea, leave with a live app."}
+            {live ? "One wall of ideas, all built in a single afternoon." : "Bring an idea, leave with a live app."}
           </p>
           <Terminal builds={count} />
           <div className="ctaRow">
-            {signupForm && (
-              <a className="cta" href={signupForm} target="_blank" rel="noreferrer">
-                <span>I&apos;M IN</span>
-                RSVP ON LUMA (REQUIRED TO ATTEND)
-                <b>↗</b>
+            {eventOver ? (
+              <a className="cta" href="#projects">
+                <span>IT&apos;S A WRAP</span>
+                {live ? `BROWSE ALL ${count} BUILDS` : "SEE THE WALL"}
+                <b>↓</b>
               </a>
+            ) : (
+              signupForm && (
+                <a className="cta" href={signupForm} target="_blank" rel="noreferrer">
+                  <span>I&apos;M IN</span>
+                  RSVP ON LUMA (REQUIRED TO ATTEND)
+                  <b>↗</b>
+                </a>
+              )
             )}
             <a className="ctaGhost" href="#guide">
-              EVENT GUIDE ↓
+              {eventOver ? "EVENT RECAP ↓" : "EVENT GUIDE ↓"}
             </a>
           </div>
         </div>
@@ -86,7 +97,7 @@ export default function Home() {
           projects={projects}
           slots={{
             count: EMPTY_SLOTS,
-            href: event.forms.post ?? signupForm,
+            href: eventOver ? null : (event.forms.post ?? signupForm),
             label: event.forms.post ? "SUBMIT YOUR BUILD ↗" : "SAVE YOUR SPOT ↗",
           }}
         />

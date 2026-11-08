@@ -95,7 +95,7 @@ export default async function OgImage() {
           </div>
           <div style={{ display: "flex", marginTop: "auto", marginLeft: -2, fontSize: 32, fontWeight: 800 }}>
             {count > 0
-              ? `${count} live builds | ${event.school} | Nov 2026`
+              ? `Event recap | ${count} live builds | ${event.school} | Nov 7 2026`
               : `Build day | Nov 7 2026 | CIF Monumental Steps, ${event.school}`}
           </div>
         </div>

@@ -37,27 +37,26 @@ export const event = {
 
   faq: [
     {
-      q: "Do I need coding experience?",
-      a: "Nope. That's the whole point. You'll learn by building with Replit, from idea to live app.",
+      q: "Did you need coding experience?",
+      a: "Nope. That was the whole point. Everyone learned by building with Replit, from idea to live app.",
     },
-    { q: "What should I bring?", a: "A laptop and a charger." },
+    { q: "What did people bring?", a: "A laptop and a charger." },
     {
-      q: "Do I need a Replit account?",
-      a: "Yes. Make a free one at replit.com before you show up so you can start building right away.",
+      q: "Did it cost anything?",
+      a: "No. It was free, and lunch was on us.",
     },
-    { q: "Does it cost anything?", a: "No. It's free, and lunch is on us." },
     {
-      q: "What do I get?",
+      q: "What did builders get?",
       a: "Pizza + Coke, Replit credits and merch. The best builds split $150 in prizes.",
     },
-    { q: "Who can come?", a: "Any UIUC student, any major, any skill level." },
+    { q: "Who could come?", a: "Any UIUC student, any major, any skill level." },
     {
-      q: "How do I sign up?",
-      a: "RSVP on Luma, then fill out the pre-event form (steps 01 and 02 above). Both are required.",
+      q: "How did sign-up work?",
+      a: "RSVP on Luma, then the pre-event form (steps 01 and 02 above). Both were required.",
     },
     {
-      q: "How does my project get on the wall?",
-      a: "Publish your app on Replit, then submit the post-event form (step 03). Everyone fills it out at 2:10.",
+      q: "How did a project get on the wall?",
+      a: "Builders published their app on Replit, then submitted the post-event form (step 03) at 2:10.",
     },
   ],
 
@@ -79,7 +78,7 @@ export const event = {
   guest: {
     name: "Brandon Middleton",
     role: "Head of Education at Replit",
-    detail: "Opens the day with a talk and a live demo of Replit Agent.",
+    detail: "Opened the day with a talk and a live demo of Replit Agent.",
     linkedin: "https://www.linkedin.com/in/brmiddle/",
     /** Path under /public */
     photo: "/guest/brandon-middleton.jpg",
@@ -88,8 +87,8 @@ export const event = {
   /** Replit credits coupon (from the QR code handed out at the event). null hides the button. */
   creditsUrl: "https://www.replit.com/~?redeemCoupon=cube-uiuc" as string | null,
 
-  /** What every attendee gets, on top of food. */
-  perks: "Lunch is on us. Plus Replit credits and merch for every builder.",
+  /** What every attendee got, on top of food. */
+  perks: "Lunch was on us. Plus Replit credits and merch for every builder.",
 
   /** e.g. { time: "12:00 PM", title: "Kickoff", detail: "Intro to Replit Agent" }. Empty = TBA. */
   itinerary: [
@@ -121,3 +120,6 @@ export const event = {
 
 /** The form the main "sign up" buttons should point at right now. */
 export const signupForm = event.forms.rsvp;
+
+/** True once the event has finished. Flips the invite copy (RSVP, countdown, calendar) to a recap. */
+export const eventOver = Date.now() > Date.parse(event.end);
