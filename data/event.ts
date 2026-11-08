@@ -84,8 +84,8 @@ export const event = {
     photo: "/guest/brandon-middleton.jpg",
   },
 
-  /** Replit credits coupon (from the QR code handed out at the event). null hides the button. */
-  creditsUrl: "https://www.replit.com/~?redeemCoupon=cube-uiuc" as string | null,
+  /** Where the credits button goes. The event coupon link is retired, so it points at replit.com. null hides the button. */
+  creditsUrl: "https://replit.com" as string | null,
 
   /** What every attendee got, on top of food. */
   perks: "Lunch was on us. Plus Replit credits and merch for every builder.",
