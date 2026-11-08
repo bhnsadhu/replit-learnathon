@@ -200,7 +200,7 @@ export function EventGuide() {
             {event.creditsUrl && (
               <div className="calRow">
                 <a className="calBtn" href={event.creditsUrl} target="_blank" rel="noreferrer">
-                  REDEEM REPLIT CREDITS ↗
+                  GO TO REPLIT ↗
                 </a>
               </div>
             )}
