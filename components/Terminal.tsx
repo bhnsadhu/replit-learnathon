@@ -20,7 +20,7 @@ function status(now: number, builds: number) {
     return `T-MINUS ${d}D ${pad(h)}H ${pad(m)}M ${pad(s)}S → BUILD DAY`;
   }
   if (now < END) return "● LIVE NOW ON THE CIF STEPS. GO BUILD.";
-  return builds > 0 ? `EVENT ENDED NOV 7. ${builds} BUILDS SHIPPED.` : "EVENT ENDED NOV 7. WALL LOADING…";
+  return builds > 0 ? `${builds} BUILDS SHIPPED.` : "WALL LOADING…";
 }
 
 export function Terminal({ builds }: { builds: number }) {

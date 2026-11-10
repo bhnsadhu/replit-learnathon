@@ -43,7 +43,7 @@ export function EventPromo() {
         {/* the visible words are the accessible name; the braces are decoration */}
         <span>
           <span aria-hidden="true">{"{ "}</span>
-          {eventOver ? "event ended: nov 7" : "build day: nov 7"}
+          {eventOver ? "event recap" : "build day: nov 7"}
           <span aria-hidden="true">{" }"}</span>
         </span>
         <small>

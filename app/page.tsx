@@ -9,7 +9,7 @@ import { event, eventOver, signupForm } from "@/data/event";
 import { projects } from "@/lib/projects";
 
 const TICKER =
-  `BUILT TO LEARN ✦ BUILT TO SHARE ✦ BUILT WITH REPLIT ✦ BUILT AT ${event.school.toUpperCase()} ✦ SHIPPED FROM THE CIF STEPS ✦ DISRUPTION LAB × REPLIT ✦ `;
+  `BUILT WITH REPLIT ✦ BUILT AT ${event.school.toUpperCase()} ✦ SHIPPED FROM THE CIF STEPS ✦ DISRUPTION LAB × REPLIT ✦ `;
 
 const EMPTY_SLOTS = 6;
 

@@ -46,7 +46,6 @@ export function EventGuide() {
       <div className="wallHeader">
         <h2>{eventOver ? "EVENT RECAP" : "EVENT GUIDE"}</h2>
         <span>
-          {eventOver ? "EVENT ENDED // " : ""}
           {event.dateLabel.toUpperCase()} // {event.time} //{" "}
           {event.location.toUpperCase()}
         </span>
