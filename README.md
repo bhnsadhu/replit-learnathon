@@ -2,7 +2,7 @@
 
 **The event site for Disruption Lab × Replit's build day at UIUC: sign-up steps, schedule and awards before the event, and one wall of 22 live student apps after it.**
 
-**[Try it → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** (free, no sign-in). **The event is over (Nov 7):** the guide now reads as a recap and the wall is the main page.
+**[Try it → learnathon.bhanusadhu.com](https://learnathon.bhanusadhu.com)** (free, no sign-in). **The event is over:** the guide now reads as a recap and the wall is the main page.
 
 ![32-second screen recording: the event recap scrolls into view, an award link opens the MindMap card on the wall, a search for "recipe" narrows 22 builds to 3, tour mode steps through full-screen builds, and Surprise Me picks a random card](docs/images/demo.gif)
 
